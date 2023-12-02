@@ -1,0 +1,48 @@
+#spanSId{
+    font-size: 150px;
+    color: black;
+    margin: 0 auto;
+}
+
+#spanHId{
+    font-size: 100px;
+    color: black;
+    margin: 0 auto;
+}
+
+#spanOId{
+    font-size: 130px;
+    color: black;
+    margin: 0 auto;
+}
+
+#spanPId{
+    font-size: 100px;
+    color: black;
+    margin: 0 auto;
+}
+
+.ShopShowDivCss {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+body{
+    background: black;
+    height: 100%;
+}
+
+
+#spanSId,
+#spanHId,
+#spanOId,
+#spanPId {
+    background: linear-gradient(to right, orange 50%, white 50%);
+    -webkit-background-clip: text;
+    color: transparent;
+}
