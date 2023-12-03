@@ -1,51 +1,54 @@
+import React, { useEffect, useRef } from 'react';
+import '../StyleCss/ShopShow.css';
+import { motion, animate } from 'framer-motion';
 
-import '../StyleCss/ShopShow.css'
-import axios from 'axios';
-import 'animate.css';
-import {useState,useEffect} from "react";
+function ShopShow({ value }) {
+    const progressTextRef = useRef(null);
 
-import { useSpring, animated } from 'react-spring';
+    useEffect(() => {
+        const progressText = progressTextRef.current?.textContent;
 
-//animate__bounceInDown
-function ShopShow(){
-    const [isDownloading, setDownloading] = useState(false);
+        if (progressText != null) {
+            const id = setInterval(() => {
+                animate(parseInt(progressText), value, {
+                    duration: 2,
+                    onUpdate: (cv) => {
+                        if (progressTextRef.current) {
+                            progressTextRef.current.textContent = cv.toFixed(0);
+                        }
+                    }
+                });
+            }, 3000);
 
-    // useSpring hook'u ile animasyonu tanımlayın
-    const downloadAnimation = useSpring({
-        opacity: isDownloading ? 1 : 0,
-        transform: isDownloading ? 'scale(1)' : 'scale(0.8)',
-    });
+            return () => {
+                clearInterval(id);
+            };
+        }
+    }, [value]);
 
-    const handleDownload = () => {
-        // İndirme başladığında durumu güncelle
-        setDownloading(true);
-
-        // İndirme süresini taklit etmek için bir süre bekleyin (örneğin, 2 saniye)
-        setTimeout(() => {
-            // İndirme tamamlandığında durumu güncelle
-            setDownloading(false);
-        }, 2000);
-    };
-
-    return(
-
+    return (
         <div className='ShopShowDivCss'>
-
-            <p className="animate__animated animate__bounceInDown animate__delay-10s">
-                <span id='spanSId'>S</span>
-                <span id='spanHId'>H</span>
-                <span id='spanOId'>O</span>
-                <span id='spanPId'>P</span>
+            <p className='word'>
+                <span className='active' id='spanSId'>S</span>
+                <span className='active' id='spanHId'>H</span>
+                <span className='active' id='spanOId'>O</span>
+                <span className='active' id='spanPId'>P</span>
             </p>
-            <div>
-                <button onClick={handleDownload}>Dosyayı İndir</button>
-
-                <animated.div style={downloadAnimation}>
-                    {isDownloading && <p>İndiriliyor...</p>}
-                </animated.div>
+            <div className='progressBar-Container'>
+                <div className='progressBar'>
+                    <motion.div
+                        className='bar'
+                        animate={{
+                            width: `${value}%`
+                        }}
+                        transition={{
+                            duration: 2
+                        }}
+                    />
+                </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default ShopShow
+export default ShopShow;
