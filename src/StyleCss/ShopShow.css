@@ -149,7 +149,7 @@
 }
 
 
-body {
+.ShopShowDivCss {
     background-color: #141114;
     color: #fff;
     background-image: linear-gradient(335deg, black 23px, transparent 23px),
@@ -162,7 +162,7 @@ body {
     font-family: 'Roboto', sans-serif;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
     height: 100vh;
     margin: 0;
 }
@@ -209,7 +209,7 @@ footer a {
 }
 
 .bar {
-    width: 0%; /* Set initial width to 0% */
+    width: 0%;
     background: rgb(255, 174, 105);
     background: linear-gradient(
             180deg,
@@ -221,7 +221,7 @@ footer a {
 
 .progressBar-Container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
 }
 

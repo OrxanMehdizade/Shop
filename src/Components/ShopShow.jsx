@@ -28,13 +28,13 @@ function ShopShow({ value }) {
 
     return (
         <div className='ShopShowDivCss'>
-            <p className='word'>
-                <span className='active' id='spanSId'>S</span>
-                <span className='active' id='spanHId'>H</span>
-                <span className='active' id='spanOId'>O</span>
-                <span className='active' id='spanPId'>P</span>
-            </p>
             <div className='progressBar-Container'>
+                <p className='word'>
+                    <span className='active' id='spanSId'>S</span>
+                    <span className='active' id='spanHId'>H</span>
+                    <span className='active' id='spanOId'>O</span>
+                    <span className='active' id='spanPId'>P</span>
+                </p>
                 <div className='progressBar'>
                     <motion.div
                         className='bar'

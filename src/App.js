@@ -32,7 +32,7 @@ function App() {
         <div className="App">
             <Routes>
                 <Route path="/" element={<ShopShow value={progress} />} />
-                <Route path="/Good/*" element={<Good />} />
+                <Route path="/good/*" element={<Good />} />
             </Routes>
         </div>
     );
