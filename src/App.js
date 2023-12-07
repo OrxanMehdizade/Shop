@@ -1,8 +1,8 @@
 import './App.css';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import {Routes, Route, useNavigate, Link} from 'react-router-dom';
 import ShopShow from './Components/ShopShow';
-import { useEffect, useState } from 'react';
-import Good from './Components/ShopMain';
+import React, { useEffect, useState } from 'react';
+import Home from "./Components/ShopMain";
 
 function App() {
     const [progress, setProgress] = useState(0);
@@ -15,7 +15,7 @@ function App() {
                     const newProgress = prevProgress + 10;
                     if (newProgress > 100) {
                         clearInterval(id);
-                        navigate('/Good');
+                        navigate('/home');
                         return 100;
                     }
                     return newProgress;
@@ -32,7 +32,7 @@ function App() {
         <div className="App">
             <Routes>
                 <Route path="/" element={<ShopShow value={progress} />} />
-                <Route path="/good/*" element={<Good />} />
+                <Route path="/home/*" element={<Home />} />
             </Routes>
         </div>
     );
