@@ -1,34 +1,94 @@
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFetchGoods,getFetchGoodsSearch } from "../store/fetchs";
+import Modal from 'react-modal';
+import {Button} from 'antd';
 
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux'
-import {getFetchGoods} from "../store/fetchs";
-import '../StyleCss/GoodsStayle.css'
+import '../StyleCss/GoodsStayle.css';
 
 const GoodComponent = () => {
-    let goodsArray=useSelector((state)=>state.mySliceName.goodsArray)
-    let [flag,setFlag]=useState(false)
-    let dispatch=useDispatch()
+    const goodsArray = useSelector((state) => state.mySliceName.goodsArray);
+    const [flag, setFlag] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [searchValue, setSearchValue] = useState('');
+    const dispatch = useDispatch();
+
+
+    function getData(){
+        dispatch(getFetchGoods());
+    }
+
+    function getSearchData(){
+        dispatch(getFetchGoodsSearch(searchValue));
+    }
+
     useEffect(() => {
-        dispatch(getFetchGoods())
-    }, [dispatch,flag]);
-    return(
+        getData();
+        getSearchData();
+
+    }, [dispatch, flag]);
+
+
+
+    const sortByCounts = (a, b) => {
+        const counts = JSON.parse(localStorage.getItem('productCounts')) || {};
+        const countA = counts[a.product_name] || 0;
+        const countB = counts[b.product_name] || 0;
+        return countB - countA;
+    };
+
+    const openModal = (product) => {
+        localStorage.setItem('selectedProductGender', product.product_name);
+        setSelectedProduct(product);
+        setModalIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setSelectedProduct(null);
+        setModalIsOpen(false);
+    };
+
+    return (
         <div>
-            <input id='searchTxtİD' placeholder='Goods Search...' type="search" />
+            <input id='searchTxtİD'
+                   placeholder='Goods Search...'
+                   type="search"
+                   value={searchValue}
+                   onChange={(e)=>{
+                       setSearchValue(e.target.value)
+                       setFlag(!flag)
+                   }}
+
+            />
             <div className='GoodsCssCompDiv'>
-                <ul>
-                    {goodsArray.map((item)=>{
-                        return(
-                            <li>
-                                <p>{item.product_name}</p>
-                                <p>{item.product_description}</p>
-                                <p>{item.product_price}</p>
-                                <p>{item.store_name}</p>
-                                <p>{item.store_address}</p>
-                            </li>
-                        )
-                    })}
+                <ul className='GoodsCssCompUl'>
+                    {goodsArray
+                        .slice()
+                        .sort((a, b) => parseFloat(a.product_price) - parseFloat(b.product_price))
+                        .sort(sortByCounts)
+                        .map((item) => (
+                        <li className='GoodsCssCompLi' key={item.id} onClick={() => openModal(item)}>
+                            <p>{item.product_name}</p>
+                            <p>{item.product_price} $</p>
+                        </li>
+                    ))}
                 </ul>
             </div>
+
+            <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+                {selectedProduct && (
+                    <div className='modalDivCss'>
+                        <h2 id='modalElementsId'>{selectedProduct.product_name}</h2>
+                        <p id='modalElementsId'>{selectedProduct.product_description}</p>
+                        <p id='modalElementsId'>{selectedProduct.store_name}</p>
+                        <p id='modalElementsId'>{selectedProduct.store_address}</p>
+                        <p id='modalElementsId'>{selectedProduct.product_price} $</p>
+                        <Button id='modalElementsId'>Add Reciplent</Button>
+                        <Button id='modalElementsId' onClick={closeModal}>Close Modal</Button>
+                    </div>
+                )}
+            </Modal>
         </div>
     );
 };
