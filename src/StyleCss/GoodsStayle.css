@@ -25,10 +25,11 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+
 }
 
 .GoodsCssCompLi {
-    border: 1px solid white;
+    border: 1px solid orange;
     width: 350px;
     border-radius: 10px;
     margin: 15px;
@@ -37,6 +38,10 @@
     display: inline-block;
     flex: 0 0 calc(33.33% - 30px);
     box-sizing: border-box;
+    padding: 20px;
+    & p{
+        margin: 10px;
+    }
 }
 
 
@@ -49,8 +54,9 @@
     text-align: center;
     & #modalElementsId{
         margin: 10px;
-
     }
+}
 
-
+#btnAddId{
+    margin-top: 10px;
 }

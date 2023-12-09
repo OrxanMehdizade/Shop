@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFetchGoods,getFetchGoodsSearch } from "../store/fetchs";
+import { getFetchGoods,postFetchAddMyBag,getFetchGoodsSearch } from "../store/fetchs";
 import Modal from 'react-modal';
 import {Button} from 'antd';
 
@@ -8,6 +8,7 @@ import '../StyleCss/GoodsStayle.css';
 
 const GoodComponent = () => {
     const goodsArray = useSelector((state) => state.mySliceName.goodsArray);
+    const checkAdd=useSelector((state)=>state.mySliceName.addMyBag)
     const [flag, setFlag] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
@@ -68,9 +69,14 @@ const GoodComponent = () => {
                         .sort((a, b) => parseFloat(a.product_price) - parseFloat(b.product_price))
                         .sort(sortByCounts)
                         .map((item) => (
-                        <li className='GoodsCssCompLi' key={item.id} onClick={() => openModal(item)}>
-                            <p>{item.product_name}</p>
+                        <li className='GoodsCssCompLi' key={item.id} >
+                            <p onClick={() => openModal(item)}>{item.product_name}</p>
                             <p>{item.product_price} $</p>
+                            <Button id='modalElementsId' onClick={()=>{
+                                dispatch(postFetchAddMyBag(item))
+                                setFlag(true)
+                                console.log(checkAdd)
+                            }}>Add Reciplent</Button>
                         </li>
                     ))}
                 </ul>
@@ -84,7 +90,6 @@ const GoodComponent = () => {
                         <p id='modalElementsId'>{selectedProduct.store_name}</p>
                         <p id='modalElementsId'>{selectedProduct.store_address}</p>
                         <p id='modalElementsId'>{selectedProduct.product_price} $</p>
-                        <Button id='modalElementsId'>Add Reciplent</Button>
                         <Button id='modalElementsId' onClick={closeModal}>Close Modal</Button>
                     </div>
                 )}

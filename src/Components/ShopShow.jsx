@@ -2,29 +2,33 @@ import React, { useEffect, useRef } from 'react';
 import '../StyleCss/ShopShow.css';
 import { motion, animate } from 'framer-motion';
 
-function ShopShow({ value }) {
+function ShopShow({ value, onProgressBarFilled }) {
     const progressTextRef = useRef(null);
-
     useEffect(() => {
-        const progressText = progressTextRef.current?.textContent;
-
-        if (progressText != null) {
-            const id = setInterval(() => {
-                animate(parseInt(progressText), value, {
-                    duration: 2,
-                    onUpdate: (cv) => {
-                        if (progressTextRef.current) {
-                            progressTextRef.current.textContent = cv.toFixed(0);
-                        }
+        console.log(value)
+        const id = setInterval(() => {
+            animate(0, value, {
+                duration: 2,
+                onUpdate: (cv) => {
+                    if (progressTextRef.current) {
+                        progressTextRef.current.textContent = cv.toFixed(0);
                     }
-                });
-            }, 3000);
+                }
+            });
+        }, 3000);
 
-            return () => {
-                clearInterval(id);
-            };
-        }
+        return () => {
+            clearInterval(id);
+        };
     }, [value]);
+
+
+    // useEffect to trigger navigation when value reaches 100
+    useEffect(() => {
+        if (value === 110) {
+            onProgressBarFilled();
+        }
+    }, [value, onProgressBarFilled]);
 
     return (
         <div className='ShopShowDivCss'>

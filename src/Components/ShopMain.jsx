@@ -20,6 +20,7 @@ const Home = () => {
             <main className='MainCss'>
                 <Routes>
                     <Route path='/' element={<GoodComponent/>}/>
+                    <Route path='GoodComponent' element={<GoodComponent/>}/>
                     <Route path="RecipientComponent" element={<RecipientComponent/>}/>
                     <Route path="AdminComponent" element={<AdminComponent/>}/>
                 </Routes>

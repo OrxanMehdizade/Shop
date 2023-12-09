@@ -1,0 +1,44 @@
+.basketMainDiv {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.basketDivCss {
+    flex: 0 0 700px;
+    height: 500px;
+    overflow-y: scroll;
+    margin-right: 20px;
+}
+
+.basketUlCss {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.basketLiCss {
+    border: 1px solid orange;
+    width: calc(33.33% - 30px);
+    border-radius: 10px;
+    margin: 15px;
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center;
+}
+
+
+.FormCss{
+    height: 370px;
+    text-align: center;
+    padding: 20px;
+    border-radius:10px ;
+    border: 1px solid orange;
+    box-shadow: 0 0 10px rgba(0,0,0,0.9);
+    background:black;
+    margin:0 auto;
+    float:right;
+}
+
+
