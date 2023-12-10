@@ -1,16 +1,35 @@
-
 import React, {useEffect, useState} from 'react';
-import {getFetchMyBag} from '../store/fetchs'
+import {getFetchMyBag,postFetchOrdersAdd} from '../store/fetchs'
 import {useDispatch,useSelector} from "react-redux";
 import { Button, Form, Input,InputNumber } from 'antd';
 import '../StyleCss/basket.css'
-import {color} from "framer-motion";
+
 
 const RecipientComponent = () => {
     const basketArray=useSelector((state)=>state.mySliceName.myBagArray);
     const dispatch=useDispatch();
-    const [flag,setFlag]=useState(true);
-    const [totalPrice,setTotalPrice]=useState('5')
+    const [flag,setFlag]=useState(false);
+    const [totalPrice,setTotalPrice]=useState('')
+    const [orderArray, setOrderArray] = useState({
+        name_LastName: '',
+        phone_Number: '',
+        address: '',
+        obj:[],
+    });
+    console.log(orderArray.obj)
+
+    const handleCheckout = async () => {
+        try {
+            await dispatch(postFetchOrdersAdd(orderArray));
+            setFlag(!flag);
+        } catch (error) {
+            console.error('Error adding order:', error);
+            // Handle error, show a message to the user, etc.
+        }
+    };
+
+
+    console.log(orderArray)
     const getData=()=>{
         dispatch(getFetchMyBag())
     }
@@ -18,34 +37,32 @@ const RecipientComponent = () => {
         getData()
     }, [dispatch,flag]);
 
-    const onFinish = (values) => {
-        console.log('Success:', values);
-    };
+    const onFinish = (values) => {console.log('Success:', values);};
     const onFinishFailed = (errorInfo) => {console.log('Failed:', errorInfo);};
 
-    const handleKeyDown = (e) => {
-        e.preventDefault();
-    };
+    const handleKeyDown = (e) => { e.preventDefault();};
     return(
         <div className='basketMainDiv' >
             <div className='basketDivCss'>
                 <ul className='basketUlCss'>
                     {basketArray.slice()
                         .sort((a, b) => parseFloat(a.product_price) - parseFloat(b.product_price))
-                        .map((item)=>(
-                            <li className='basketLiCss'>
+                        .map((item,index)=>(
+                            <li key={index} className='basketLiCss'>
                                 <h2>{item.product_name}</h2>
                                 <p>{item.product_description}</p>
                                 <p>{item.store_name}</p>
                                 <p>{item.store_address}</p>
                                 <p>{item.product_price} $</p>
-                                <InputNumber type="number" min={1} onKeyDown={handleKeyDown}/>
+                                <InputNumber type="number"
+                                             min={1}
+                                             onKeyDown={handleKeyDown}
+
+                                />
                             </li>
                         ))}
                 </ul>
-                <Button
-                    style={{background:"orange",marginLeft:'40%',marginTop:'10px'}}
-                    type='primary'>Empty The Product</Button>
+                <Button id='emptyBtnCss' type='primary'>Empty The Product</Button>
 
             </div>
 
@@ -59,9 +76,9 @@ const RecipientComponent = () => {
                 onFinishFailed={onFinishFailed}
                 autoComplete="off">
 
-                <h1 style={{color:"white",textAlign:'center',marginBottom:'10px'}}>Order Form</h1>
+                <h1 id='h1OrderCss'>Order Form</h1>
                 <Form.Item
-                    label={<span style={{ color: "white", fontSize: '13px', marginRight: '50px' }}>Name LastName </span>}
+                    label={<span id='nameLastNameCss'>Name LastName </span>}
                     name="nameLastName"
                     rules={[
                         {
@@ -91,14 +108,13 @@ const RecipientComponent = () => {
                                 return Promise.resolve();
                             },
                         }
-                    ]}
-                >
-                    <Input name="nameLastName" />
+                    ]}>
+                    <Input name="nameLastName" onChange={(e)=>setOrderArray({ ...orderArray, 'name_LastName': e.target.value })} />
                 </Form.Item>
 
 
                 <Form.Item
-                    label={<span style={{color:"white",fontSize:'13px', marginRight:'50px'}}>Telefon Number</span>}
+                    label={<span id='phoneNumberCss' >Telefon Number</span>}
                     name="phoneNumber"
                     rules={[
                         {
@@ -107,17 +123,17 @@ const RecipientComponent = () => {
                         }, {
                             pattern: /^\+[1-9]\d{2}\s\d{2}\s\d{3}\s\d{2}\s\d{2}$/,
                             message: 'Your phone was stupid !'},]}>
-                    <Input type="tel" name="phoneNumber"  />
+                    <Input type="tel" name="phoneNumber" onChange={(e)=>setOrderArray({ ...orderArray, 'phone_Number': e.target.value })}  />
                 </Form.Item>
 
-                <Form.Item label={<span style={{color:"white",fontSize:'13px', marginRight:'50px'}}>Address</span>}
-                    name="address" rules={[{required: true, message: 'Please input your address!',},]}>
-                    <Input.TextArea name="address" />
+                <Form.Item label={<span id='addressCss'>Address</span>}
+                           name="address" rules={[{required: true, message: 'Please input your address!',},]}>
+                    <Input.TextArea name="address" onChange={(e)=>setOrderArray({ ...orderArray, 'address': e.target.value })}  />
                 </Form.Item>
 
-                <h3 style={{color:"white",textAlign:'center',paddingLeft:'105px'}}>Total Price: {totalPrice}</h3>
+                <h3 id='totalPriceCss'>Total Price: {totalPrice}</h3>
                 <Form.Item wrapperCol={{ offset: 8, span: 16,}}>
-                    <Button style={{background:"orange",marginTop:'10px',width:'150px'}} type="primary" htmlType="submit" >
+                    <Button id='checkOutCss' type="primary" htmlType="submit" onClick={handleCheckout} >
                         Checkout
                     </Button>
                 </Form.Item>
@@ -126,4 +142,4 @@ const RecipientComponent = () => {
     )
 };
 
-export default RecipientComponent;
+export default RecipientComponent

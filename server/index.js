@@ -294,9 +294,7 @@ app.get("/search-goods/:searchValue", (req, res) => {
 
 app.get("/search-admin/:searchValue", (req, res) => {
     let searchValue = req.params.searchValue;
-    let filteredArray = goods.filter((item) =>
-        item.product_name.startsWith(searchValue)
-    );
+    let filteredArray = goods.filter((item) => item.product_name.toLowerCase().startsWith(searchValue));
     res.json(filteredArray);
 });
 

@@ -1,0 +1,93 @@
+.adminDiv{
+    width: 100vw;
+    height: 100vh;
+    overflow-y: scroll;
+}
+.adminUl{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.adminLi{
+    border: 1px solid orange;
+    width: 350px;
+    border-radius: 10px;
+    margin: 15px;
+    list-style: none;
+    text-align: center;
+    display: inline-block;
+    flex: 0 0 calc(33.33% - 30px);
+    box-sizing: border-box;
+    padding: 20px;
+    & p{
+        margin: 10px;
+    }
+
+    & Button{
+        margin: 10px;
+    }
+}
+
+.SearchBtnCss{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+#searchTxtİD {
+    border-radius: 15px;
+    width: 350px;
+    padding: 5px;
+    border: 1px solid white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    &::placeholder{
+        color: black;
+        text-align: center;
+    }
+}
+
+
+.modalDivCss{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    text-align: center;
+    & #modalElementsId{
+        margin: 10px;
+    }
+    & Input,& Button{
+        margin: 10px;
+    }
+}
+
+.modalDiv{
+    overflow-y: scroll;
+}
+.modalUl{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.modalLi{
+    border: 1px solid orange;
+    width: 350px;
+    border-radius: 10px;
+    margin: 15px;
+    list-style: none;
+    text-align: center;
+    display: inline-block;
+    flex: 0 0 calc(33.33% - 30px);
+    box-sizing: border-box;
+    padding: 20px;
+    & p{
+        margin: 10px;
+    }
+}

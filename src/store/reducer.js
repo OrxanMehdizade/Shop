@@ -6,7 +6,10 @@ const shopSlice=createSlice({
         goodsArray:[],
         myBagArray:[],
         ordersArray:[],
-        addMyBag:[],
+        addMyBag:null,
+        addOrders:null,
+        editPrice:null,
+        deleteAdminData:null,
     },
     reducers:{
         getGoodsArray:(state,action)=>{
@@ -23,7 +26,20 @@ const shopSlice=createSlice({
         },
         postMyBagAdd:(state,action)=>{
             return { ...state, addMyBag: action.payload };
+        },
+        postOrdersAdd:(state,action)=>{
+            return {...state,addOrders: action.payload}
+        },
+        getAdminSearch(state,action){
+            return { ...state, goodsArray: action.payload };
+        },
+        editAdmin(state, action) {
+            return { ...state, editPrice: action.payload };
+        },
+        deleteAdmin(state,action){
+            return{...state,deleteAdminData:action.payload}
         }
+
 
     }
 })
@@ -32,5 +48,9 @@ export const {getGoodsArray
     ,getOrdersArray
     ,getMyBagArray,
     getGoodsSearch,
-    postMyBagAdd}=shopSlice.actions
+    getAdminSearch,
+    postMyBagAdd,
+    postOrdersAdd,
+    editAdmin,
+    deleteAdmin}=shopSlice.actions
 export default shopSlice.reducer
