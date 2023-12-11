@@ -10,6 +10,7 @@ const shopSlice=createSlice({
         addOrders:null,
         editPrice:null,
         deleteAdminData:null,
+        deleteRecipientData:null,
     },
     reducers:{
         getGoodsArray:(state,action)=>{
@@ -38,6 +39,9 @@ const shopSlice=createSlice({
         },
         deleteAdmin(state,action){
             return{...state,deleteAdminData:action.payload}
+        },
+        deleteRecipient(state,action){
+            return{...state,deleteRecipientData:action.payload}
         }
 
 
@@ -52,5 +56,6 @@ export const {getGoodsArray
     postMyBagAdd,
     postOrdersAdd,
     editAdmin,
-    deleteAdmin}=shopSlice.actions
+    deleteAdmin,
+    deleteRecipient}=shopSlice.actions
 export default shopSlice.reducer

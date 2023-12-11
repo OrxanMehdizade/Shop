@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {getFetchMyBag,postFetchOrdersAdd} from '../store/fetchs'
+import {getFetchMyBag, postFetchOrdersAdd,deleteFetchRecipient} from '../store/fetchs'
 import {useDispatch,useSelector} from "react-redux";
-import { Button, Form, Input,InputNumber } from 'antd';
+import { Button, Form, Input,InputNumber,Select } from 'antd';
 import '../StyleCss/basket.css'
 
 
@@ -10,26 +10,19 @@ const RecipientComponent = () => {
     const dispatch=useDispatch();
     const [flag,setFlag]=useState(false);
     const [totalPrice,setTotalPrice]=useState('')
+    const [sorting, setSorting] = useState(null);
+    const [sortedBasketArray, setSortedBasketArray] = useState([...basketArray]);
+    const renderBasketArray = sorting ? sortedBasketArray : basketArray;
     const [orderArray, setOrderArray] = useState({
         name_LastName: '',
         phone_Number: '',
         address: '',
-        obj:[],
+        obj:[...basketArray],
     });
-    console.log(orderArray.obj)
-
-    const handleCheckout = async () => {
-        try {
-            await dispatch(postFetchOrdersAdd(orderArray));
-            setFlag(!flag);
-        } catch (error) {
-            console.error('Error adding order:', error);
-            // Handle error, show a message to the user, etc.
-        }
-    };
 
 
-    console.log(orderArray)
+
+
     const getData=()=>{
         dispatch(getFetchMyBag())
     }
@@ -40,14 +33,26 @@ const RecipientComponent = () => {
     const onFinish = (values) => {console.log('Success:', values);};
     const onFinishFailed = (errorInfo) => {console.log('Failed:', errorInfo);};
 
+    const handleSorting = (order) => {
+        setSorting(order);
+        let sortedArray = [...basketArray];
+
+        if (order === 'Ascending') {
+            sortedArray.sort((a, b) => a.product_price - b.product_price);
+        } else if (order === 'Descending') {
+            sortedArray.sort((a, b) => b.product_price - a.product_price);
+        }
+
+        setSortedBasketArray(sortedArray);
+    };
+
+
     const handleKeyDown = (e) => { e.preventDefault();};
     return(
         <div className='basketMainDiv' >
             <div className='basketDivCss'>
                 <ul className='basketUlCss'>
-                    {basketArray.slice()
-                        .sort((a, b) => parseFloat(a.product_price) - parseFloat(b.product_price))
-                        .map((item,index)=>(
+                    {renderBasketArray.map((item,index)=>(
                             <li key={index} className='basketLiCss'>
                                 <h2>{item.product_name}</h2>
                                 <p>{item.product_description}</p>
@@ -57,12 +62,41 @@ const RecipientComponent = () => {
                                 <InputNumber type="number"
                                              min={1}
                                              onKeyDown={handleKeyDown}
-
                                 />
+                                <Button onClick={()=>{
+                                    dispatch(deleteFetchRecipient(item))
+                                    setFlag(!flag)
+                                }}>Delete</Button>
                             </li>
                         ))}
                 </ul>
                 <Button id='emptyBtnCss' type='primary'>Empty The Product</Button>
+                <Select
+                    defaultValue="Sorting"
+                    style={{
+                        width: 120,
+                        background: "orange",
+                        color: "white", // Text color for options
+                        borderRadius: 5,
+
+                    }}
+                    dropdownStyle={{ background: "orange", color: "white" }}
+                    onChange={(value) => {
+                        handleSorting(value)
+                        setFlag(true)
+                    }}
+                    options={[
+                        {
+                            value: 'Ascending',
+                            label: 'Ascending',
+                        },
+                        {
+                            value: 'Descending',
+                            label: 'Descending',
+                        },
+
+                    ]}
+                />
 
             </div>
 
@@ -133,7 +167,10 @@ const RecipientComponent = () => {
 
                 <h3 id='totalPriceCss'>Total Price: {totalPrice}</h3>
                 <Form.Item wrapperCol={{ offset: 8, span: 16,}}>
-                    <Button id='checkOutCss' type="primary" htmlType="submit" onClick={handleCheckout} >
+                    <Button id='checkOutCss' type="primary" htmlType="submit" onClick={()=>{
+                        dispatch(postFetchOrdersAdd(orderArray));
+                        setFlag(true);
+                    }} >
                         Checkout
                     </Button>
                 </Form.Item>

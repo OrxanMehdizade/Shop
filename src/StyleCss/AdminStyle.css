@@ -52,6 +52,22 @@
 }
 
 
+.modalObjDivCss{
+    margin-top: 30px;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-top: 30px;
+    text-align: center;
+    & Button{
+        margin: 10px;
+    }
+}
+
+
 .modalDivCss{
     position: absolute;
     top: 50%;
@@ -67,6 +83,23 @@
     }
 }
 
+#prodId{
+    border: 1px solid orange;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+#objPId{
+    border: 1px solid;
+    border-color:white white orange white;
+}
+
+
+#userH2Id{
+    border: 2px dotted orange;
+    border-radius: 10px;
+    padding:5px;
+}
 .modalDiv{
     overflow-y: scroll;
 }

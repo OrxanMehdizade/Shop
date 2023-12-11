@@ -32,6 +32,8 @@ const AdminComponent = () => {
     }
 
 
+
+
     useEffect(() => {
         getGoodsData();
         getSearchData()
@@ -49,6 +51,7 @@ const AdminComponent = () => {
                            setSearchValue(e.target.value)
                            setFlag(!flag)
                        }}/>
+
                 <Button onClick={()=>setShowOrder(true)}>səbət</Button>
             </div>
             <div className='adminDiv'>
@@ -78,21 +81,23 @@ const AdminComponent = () => {
 
             {
                 <Modal isOpen={showOrder}>
-                    <div className='modalDivCss'>
-                        <div className='modalDiv'>
-                            <ul className='modalUl'>
+                    <div className='modalObjDivCss'>
+                        <div className='modalObjDiv'>
+                            <ul className='modalObjUl'>
                                 {ordersArray.map((order, index) => (
                                     <li className='modalLi' key={index}>
-                                        <p>{order.name_LastName}</p>
-                                        <p>{order.phone_Number}</p>
-                                        <p>{order.address}</p>
+                                        <h2 id='userH2Id'>User Order</h2>
+                                        <p id='objPId'>Name LastName: {order.name_LastName}</p>
+                                        <p id='objPId'>Phone Number: {order.phone_Number}</p>
+                                        <p id='objPId'>Address: {order.address}</p>
+
                                         {order.obj.map((product, prodIndex) => (
-                                            <div key={prodIndex}>
+                                            <div id='prodId' key={prodIndex}>
                                                 <p>{product.product_name}</p>
                                                 <p>{product.product_description}</p>
                                                 <p>{product.store_name}</p>
                                                 <p>{product.store_address}</p>
-                                                <p>{product.product_price}</p>
+                                                <p>{product.product_price} $</p>
                                             </div>
                                         ))}
                                     </li>
