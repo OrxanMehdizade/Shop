@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFetchGoods,postFetchAddMyBag,getFetchGoodsSearch } from "../store/fetchs";
 import Modal from 'react-modal';
-import {Button} from 'antd';
+import {Button, Select} from 'antd';
 
 import '../StyleCss/GoodsStayle.css';
 
@@ -12,6 +12,7 @@ const GoodComponent = () => {
     const [flag, setFlag] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [sorting, setSorting] = useState(null);
     const [searchValue, setSearchValue] = useState('');
     const dispatch = useDispatch();
 
@@ -23,6 +24,19 @@ const GoodComponent = () => {
     function getSearchData(){
         dispatch(getFetchGoodsSearch(searchValue));
     }
+
+    const handleSorting = (sorting) => {
+        const goodsArrayCopy = [...goodsArray];
+
+        if (sorting === 'Ascending') {
+            return goodsArrayCopy.sort((a, b) => a.product_price - b.product_price);
+        } else if (sorting === 'Descending') {
+            return goodsArrayCopy.sort((a, b) => b.product_price - a.product_price);
+        }
+
+        return goodsArrayCopy;
+    };
+
 
     useEffect(() => {
         getData();
@@ -62,13 +76,35 @@ const GoodComponent = () => {
                    }}
 
             />
+            <Select
+                defaultValue="Sorting"
+                style={{
+                    width: 120,
+                    background: "orange",
+                    color: "white",
+                    borderRadius: 5,
+
+                }}
+                dropdownStyle={{ background: "orange", color: "white" }}
+                onChange={(value) => {
+                    setSorting(value)
+                    setFlag(true)
+                }}
+                options={[
+                    {
+                        value: 'Ascending',
+                        label: 'Ascending',
+                    },
+                    {
+                        value: 'Descending',
+                        label: 'Descending',
+                    },
+
+                ]}
+            />
             <div className='GoodsCssCompDiv'>
                 <ul className='GoodsCssCompUl'>
-                    {goodsArray
-                        .slice()
-                        .sort((a, b) => parseFloat(a.product_price) - parseFloat(b.product_price))
-                        .sort(sortByCounts)
-                        .map((item) => (
+                    {handleSorting(sorting).map((item) => (
                         <li className='GoodsCssCompLi' key={item.id} >
                             <p onClick={() => openModal(item)}>{item.product_name}</p>
                             <p>{item.product_price} $</p>

@@ -9,18 +9,13 @@ const RecipientComponent = () => {
     const basketArray=useSelector((state)=>state.mySliceName.myBagArray);
     const dispatch=useDispatch();
     const [flag,setFlag]=useState(false);
-    const [totalPrice,setTotalPrice]=useState('')
     const [sorting, setSorting] = useState(null);
-    const [sortedBasketArray, setSortedBasketArray] = useState([...basketArray]);
-    const renderBasketArray = sorting ? sortedBasketArray : basketArray;
     const [orderArray, setOrderArray] = useState({
         name_LastName: '',
         phone_Number: '',
         address: '',
         obj:[...basketArray],
     });
-
-
 
 
     const getData=()=>{
@@ -33,18 +28,19 @@ const RecipientComponent = () => {
     const onFinish = (values) => {console.log('Success:', values);};
     const onFinishFailed = (errorInfo) => {console.log('Failed:', errorInfo);};
 
-    const handleSorting = (order) => {
-        setSorting(order);
-        let sortedArray = [...basketArray];
+    const handleSorting = (sorting) => {
+        const basketArrayCopy = [...basketArray];
 
-        if (order === 'Ascending') {
-            sortedArray.sort((a, b) => a.product_price - b.product_price);
-        } else if (order === 'Descending') {
-            sortedArray.sort((a, b) => b.product_price - a.product_price);
+        if (sorting === 'Ascending') {
+            return basketArrayCopy.sort((a, b) => a.product_price - b.product_price);
+        } else if (sorting === 'Descending') {
+            return basketArrayCopy.sort((a, b) => b.product_price - a.product_price);
         }
 
-        setSortedBasketArray(sortedArray);
+        return basketArrayCopy;
     };
+
+
 
 
     const handleKeyDown = (e) => { e.preventDefault();};
@@ -52,7 +48,7 @@ const RecipientComponent = () => {
         <div className='basketMainDiv' >
             <div className='basketDivCss'>
                 <ul className='basketUlCss'>
-                    {renderBasketArray.map((item,index)=>(
+                    {handleSorting(sorting).map((item,index)=>(
                             <li key={index} className='basketLiCss'>
                                 <h2>{item.product_name}</h2>
                                 <p>{item.product_description}</p>
@@ -76,13 +72,13 @@ const RecipientComponent = () => {
                     style={{
                         width: 120,
                         background: "orange",
-                        color: "white", // Text color for options
+                        color: "white",
                         borderRadius: 5,
 
                     }}
                     dropdownStyle={{ background: "orange", color: "white" }}
                     onChange={(value) => {
-                        handleSorting(value)
+                        setSorting(value)
                         setFlag(true)
                     }}
                     options={[
@@ -165,7 +161,7 @@ const RecipientComponent = () => {
                     <Input.TextArea name="address" onChange={(e)=>setOrderArray({ ...orderArray, 'address': e.target.value })}  />
                 </Form.Item>
 
-                <h3 id='totalPriceCss'>Total Price: {totalPrice}</h3>
+                <h3 id='totalPriceCss'>Total Price: </h3>
                 <Form.Item wrapperCol={{ offset: 8, span: 16,}}>
                     <Button id='checkOutCss' type="primary" htmlType="submit" onClick={()=>{
                         dispatch(postFetchOrdersAdd(orderArray));
