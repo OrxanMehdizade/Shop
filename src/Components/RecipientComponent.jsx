@@ -7,6 +7,7 @@ import '../StyleCss/basket.css'
 
 const RecipientComponent = () => {
     const basketArray=useSelector((state)=>state.mySliceName.myBagArray);
+    const chekor=useSelector((state)=>state.mySliceName.addOrders)
     const dispatch=useDispatch();
     const [flag,setFlag]=useState(false);
     const [sorting, setSorting] = useState(null);
@@ -17,7 +18,7 @@ const RecipientComponent = () => {
         obj:[...basketArray],
     });
 
-
+    console.log(chekor)
     const getData=()=>{
         dispatch(getFetchMyBag())
     }
@@ -79,7 +80,7 @@ const RecipientComponent = () => {
                     dropdownStyle={{ background: "orange", color: "white" }}
                     onChange={(value) => {
                         setSorting(value)
-                        setFlag(true)
+                        setFlag(!flag)
                     }}
                     options={[
                         {
@@ -165,7 +166,7 @@ const RecipientComponent = () => {
                 <Form.Item wrapperCol={{ offset: 8, span: 16,}}>
                     <Button id='checkOutCss' type="primary" htmlType="submit" onClick={()=>{
                         dispatch(postFetchOrdersAdd(orderArray));
-                        setFlag(true);
+                        setFlag(!flag);
                     }} >
                         Checkout
                     </Button>

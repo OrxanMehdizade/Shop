@@ -20,7 +20,7 @@ const shopSlice=createSlice({
             return {...state,myBagArray: action.payload}
         },
         getOrdersArray:(state,action)=>{
-            return {...state,ordersArray: action.payload}
+            return {...state, ordersArray: action.payload}
         },
         getGoodsSearch(state,action){
             return { ...state, goodsArray: action.payload };
@@ -29,7 +29,7 @@ const shopSlice=createSlice({
             return { ...state, addMyBag: action.payload };
         },
         postOrdersAdd:(state,action)=>{
-            return {...state,addOrders: action.payload}
+            return {...state, addOrders: action.payload}
         },
         getAdminSearch(state,action){
             return { ...state, goodsArray: action.payload };

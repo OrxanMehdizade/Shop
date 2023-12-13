@@ -58,7 +58,7 @@ export function postFetchOrdersAdd(object){
             body:JSON.stringify(object)
         })
             .then(res=>res.text())
-            .then(data=>dispatch(postOrdersAdd(object)))
+            .then(data=>dispatch(postOrdersAdd(data)))
     }
 }
 

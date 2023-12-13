@@ -88,7 +88,7 @@ const GoodComponent = () => {
                 dropdownStyle={{ background: "orange", color: "white" }}
                 onChange={(value) => {
                     setSorting(value)
-                    setFlag(true)
+                    setFlag(!flag)
                 }}
                 options={[
                     {
@@ -110,7 +110,7 @@ const GoodComponent = () => {
                             <p>{item.product_price} $</p>
                             <Button id='modalElementsId' onClick={()=>{
                                 dispatch(postFetchAddMyBag(item))
-                                setFlag(true)
+                                setFlag(!flag)
                                 console.log(checkAdd)
                             }}>Add Reciplent</Button>
                         </li>

@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react';
 import {getFetchGoods, getFetchAdminSearch, getFetchOrders,editFetchAdmin,deleteFetchAdmin} from '../store/fetchs';
 import { useDispatch, useSelector } from 'react-redux';
 import '../StyleCss/AdminStyle.css'
-import {Button, Input, Select} from "antd";
+import {Button, Input, Select,Alert} from "antd";
 import Modal from "react-modal";
 
 const AdminComponent = () => {
@@ -45,6 +45,7 @@ const AdminComponent = () => {
     };
 
 
+
     useEffect(() => {
         getGoodsData();
         getSearchData()
@@ -74,7 +75,7 @@ const AdminComponent = () => {
                     dropdownStyle={{ background: "orange", color: "white" }}
                     onChange={(value) => {
                         setSorting(value)
-                        setFlag(true)
+                        setFlag(!flag)
                     }}
                     options={[
                         {
@@ -143,6 +144,7 @@ const AdminComponent = () => {
                 </Modal>
                 }
 
+
             {
                 <Modal isOpen={modalIsOpen}>
                     <div className='modalDivCss'>
@@ -151,6 +153,7 @@ const AdminComponent = () => {
                             dispatch(editFetchAdmin(editObj, price));
                             setModalIsOpen(false);
                             setFlag(!flag)
+
                         }}>Edit</Button>
 
                         <Button onClick={()=>setModalIsOpen(false)}>Exit</Button>

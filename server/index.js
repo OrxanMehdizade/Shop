@@ -250,7 +250,7 @@ app.post("/add-mybag", (req, res) => {
 app.post("/add-orders", (req, res) => {
     let obj = req.body;
     orders.push(obj);
-    res.send(`Orders of ${obj.ordererName} was added orders`);
+    res.send(`Orders of ${obj.name_LastName} was added orders`);
 });
 
 app.delete("/delete-mybag/:id", (req, res) => {
