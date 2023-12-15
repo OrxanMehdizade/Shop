@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react';
 import {getFetchGoods, getFetchAdminSearch, getFetchOrders,editFetchAdmin,deleteFetchAdmin} from '../store/fetchs';
 import { useDispatch, useSelector } from 'react-redux';
 import '../StyleCss/AdminStyle.css'
-import {Button, Input, Select,Alert} from "antd";
+import {Button, Input, Select, Alert, Image} from "antd";
 import Modal from "react-modal";
 
 const AdminComponent = () => {
@@ -46,6 +46,8 @@ const AdminComponent = () => {
 
 
 
+
+    const { Option } = Select;
     useEffect(() => {
         getGoodsData();
         getSearchData()
@@ -55,8 +57,8 @@ const AdminComponent = () => {
     return (
         <div>
             <div className='SearchBtnCss'>
-                <input id='searchTxtİD'
-                       placeholder='Goods Search...'
+                <input id='searchAdminTxtİD'
+                       placeholder='Admin Search...'
                        type="search"
                        value={searchValue}
                        onChange={(e)=>{
@@ -64,48 +66,38 @@ const AdminComponent = () => {
                            setFlag(!flag)
                        }}/>
                 <Select
+                    className="custom-select"
                     defaultValue="Sorting"
-                    style={{
-                        width: 120,
-                        background: "orange",
-                        color: "white",
-                        borderRadius: 5,
-
-                    }}
-                    dropdownStyle={{ background: "orange", color: "white" }}
                     onChange={(value) => {
                         setSorting(value)
                         setFlag(!flag)
                     }}
-                    options={[
-                        {
-                            value: 'Ascending',
-                            label: 'Ascending',
-                        },
-                        {
-                            value: 'Descending',
-                            label: 'Descending',
-                        },
-
-                    ]}
-                />
-
-                <Button onClick={()=>setShowOrder(true)}>səbət</Button>
+                    dropdownClassName="custom-dropdown"
+                >
+                    <Option value="Ascending" className="select-items">
+                        Ascending
+                    </Option>
+                    <Option value="Descending" className="select-items">
+                        Descending
+                    </Option>
+                </Select>
+                <Button onClick={()=>setShowOrder(true)}></Button>
             </div>
             <div className='adminDiv'>
                 <ul className='adminUl'>
                     {handleSorting(sorting).map((item)=>(
                         <li className='adminLi'>
+                            <Image id='imgAdminId' src={item.product_image}/>
                             <p>{item.product_name}</p>
                             <p>{item.product_description}</p>
                             <p>{item.store_name}</p>
                             <p>{item.store_address}</p>
                             <p>{item.product_price}</p>
-                            <Button onClick={()=> {
+                            <Button id='editCss' onClick={()=> {
                                 setEditObj(item)
                                 setModalIsOpen(true)
                             }}>Edit</Button>
-                            <Button onClick={()=>{
+                            <Button id='deleteCss' onClick={()=>{
                                 dispatch(deleteFetchAdmin(item))
                                 setFlag(!flag)
                             }}>Delete</Button>
@@ -128,6 +120,7 @@ const AdminComponent = () => {
 
                                         {order.obj.map((product, prodIndex) => (
                                             <div id='prodId' key={prodIndex}>
+                                                <Image id='imgProductId' src={product.product_image}/>
                                                 <p>{product.product_name}</p>
                                                 <p>{product.product_description}</p>
                                                 <p>{product.store_name}</p>

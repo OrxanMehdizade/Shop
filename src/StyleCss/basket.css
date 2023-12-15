@@ -67,9 +67,23 @@
     margin-top: 10px;
     width: 150px;
 }
+#imgBasketId{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 200px;
+    object-fit: cover;
+    overflow: auto;
+}
+.emptySelectDivCss{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 #emptyBtnCss{
-    background: orange;
-    margin-left: 40%;
-    margin-top:10px ;
+    background: white;
+    color: orange;
+    margin-right: 10px;
+    border: 2px solid orange;
 }

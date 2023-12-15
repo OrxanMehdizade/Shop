@@ -29,27 +29,105 @@
     }
 }
 
-.SearchBtnCss{
+.SearchBtnCss {
     display: flex;
-    flex-wrap: wrap;
-
-}
-#searchTxtİD {
-    border-radius: 15px;
-    width: 350px;
-    padding: 5px;
-    border: 1px solid white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
-    display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: center;
-    margin: auto;
-    &::placeholder{
-        color: black;
+    margin-right: 20px;
+    & #searchAdminTxtİD {
+        margin-right: 10px;
+        border: 2px solid orange;
+        background: white;
+        color: orange;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+        width: 350px;
+        border-radius: 15px;
+        padding: 5px;
+        &::placeholder{
+            color: orange;
+            text-align: center;
+        }
+        &:hover{
+            border: 2px solid #3C97BF;
+        }
+    }
+
+
+    & button{
+        background-image: url('../İmages/basket.png');
+        background-size: cover;
+        padding: 15px;
+        background-position: center;
+        margin-left: 10px;
+        font-size: 15px;
+        border: 2px solid orange;
+        color: white;
         text-align: center;
     }
 }
+
+
+
+
+.select-items div,.select-selected {
+    color: #ffffff;
+    padding: 8px 16px;
+    cursor: pointer;
+    user-select: none;
+}
+
+
+.custom-select .ant-select-selector {
+    color: white;
+    border: 2px solid orange;
+}
+
+.custom-select .ant-select-selection-placeholder,
+.custom-select .ant-select-selection-item {
+    color: orange;
+}
+
+.custom-select .ant-select-arrow {
+    color: orange;
+}
+
+.custom-select {
+    width: 200px;
+}
+
+.custom-dropdown {
+    border: 1px solid orange;
+}
+
+.select-items {
+    background-color: orange !important;
+    color: white !important;
+}
+
+.custom-select .rc-select-dropdown {
+    background-color: orange !important;
+}
+
+.custom-select .rc-select-dropdown-menu {
+    margin: 10px;
+    background-color: white !important;
+}
+
+#imgAdminId,#imgProductId{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 200px;
+    object-fit: cover;
+    overflow: auto;
+}
+
+#editCss,#deleteCss{
+    border: 2px solid orange;
+    color: orange;
+    margin: 10px;
+}
+
 
 
 .modalObjDivCss{

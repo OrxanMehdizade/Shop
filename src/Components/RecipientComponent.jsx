@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {getFetchMyBag, postFetchOrdersAdd,deleteFetchRecipient} from '../store/fetchs'
+import {getFetchMyBag, postFetchOrdersAdd,deleteFetchRecipient,deleteFetchBasketRecipient} from '../store/fetchs'
 import {useDispatch,useSelector} from "react-redux";
-import { Button, Form, Input,InputNumber,Select } from 'antd';
+import {Button, Form, Image, Input, InputNumber, Select} from 'antd';
 import '../StyleCss/basket.css'
 
 
@@ -11,6 +11,7 @@ const RecipientComponent = () => {
     const dispatch=useDispatch();
     const [flag,setFlag]=useState(false);
     const [sorting, setSorting] = useState(null);
+    const { Option } = Select;
     const [orderArray, setOrderArray] = useState({
         name_LastName: '',
         phone_Number: '',
@@ -51,6 +52,7 @@ const RecipientComponent = () => {
                 <ul className='basketUlCss'>
                     {handleSorting(sorting).map((item,index)=>(
                             <li key={index} className='basketLiCss'>
+                                <Image id='imgBasketId' src={item.product_image}/>
                                 <h2>{item.product_name}</h2>
                                 <p>{item.product_description}</p>
                                 <p>{item.store_name}</p>
@@ -67,33 +69,29 @@ const RecipientComponent = () => {
                             </li>
                         ))}
                 </ul>
-                <Button id='emptyBtnCss' type='primary'>Empty The Product</Button>
-                <Select
-                    defaultValue="Sorting"
-                    style={{
-                        width: 120,
-                        background: "orange",
-                        color: "white",
-                        borderRadius: 5,
+                <div className='emptySelectDivCss'>
 
-                    }}
-                    dropdownStyle={{ background: "orange", color: "white" }}
-                    onChange={(value) => {
-                        setSorting(value)
-                        setFlag(!flag)
-                    }}
-                    options={[
-                        {
-                            value: 'Ascending',
-                            label: 'Ascending',
-                        },
-                        {
-                            value: 'Descending',
-                            label: 'Descending',
-                        },
-
-                    ]}
-                />
+                    <Button id='emptyBtnCss' type='primary' onClick={()=>{
+                        dispatch(deleteFetchBasketRecipient(basketArray));
+                        setFlag(!flag);
+                    }}>Empty The Product</Button>
+                    <Select
+                        className="custom-select"
+                        defaultValue="Sorting"
+                        onChange={(value) => {
+                            setSorting(value)
+                            setFlag(!flag)
+                        }}
+                        dropdownClassName="custom-dropdown"
+                    >
+                        <Option value="Ascending" className="select-items">
+                            Ascending
+                        </Option>
+                        <Option value="Descending" className="select-items">
+                            Descending
+                        </Option>
+                    </Select>
+                </div>
 
             </div>
 

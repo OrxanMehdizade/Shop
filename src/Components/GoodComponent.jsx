@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFetchGoods,postFetchAddMyBag,getFetchGoodsSearch } from "../store/fetchs";
 import Modal from 'react-modal';
-import {Button, Select} from 'antd';
+import {Button, Select,Image} from 'antd';
 
 import '../StyleCss/GoodsStayle.css';
 
@@ -15,6 +15,7 @@ const GoodComponent = () => {
     const [sorting, setSorting] = useState(null);
     const [searchValue, setSearchValue] = useState('');
     const dispatch = useDispatch();
+    const { Option } = Select;
 
 
     function getData(){
@@ -64,51 +65,45 @@ const GoodComponent = () => {
         setModalIsOpen(false);
     };
 
+
     return (
-        <div>
-            <input id='searchTxtİD'
-                   placeholder='Goods Search...'
-                   type="search"
-                   value={searchValue}
-                   onChange={(e)=>{
-                       setSearchValue(e.target.value)
-                       setFlag(!flag)
-                   }}
+        <div className='mainGoodsDiv'>
+            <div className='SearchGoodBtnCss'>
+                <input id='searchTxtİD'
+                       placeholder='Goods Search...'
+                       type="search"
+                       value={searchValue}
+                       onChange={(e)=>{
+                           setSearchValue(e.target.value)
+                           setFlag(!flag)
+                       }}
 
-            />
-            <Select
-                defaultValue="Sorting"
-                style={{
-                    width: 120,
-                    background: "orange",
-                    color: "white",
-                    borderRadius: 5,
-
-                }}
-                dropdownStyle={{ background: "orange", color: "white" }}
-                onChange={(value) => {
-                    setSorting(value)
-                    setFlag(!flag)
-                }}
-                options={[
-                    {
-                        value: 'Ascending',
-                        label: 'Ascending',
-                    },
-                    {
-                        value: 'Descending',
-                        label: 'Descending',
-                    },
-
-                ]}
-            />
+                />
+                <Select
+                    className="custom-select"
+                    defaultValue="Sorting"
+                    onChange={(value) => {
+                        setSorting(value)
+                        setFlag(!flag)
+                    }}
+                    dropdownClassName="custom-dropdown"
+                >
+                    <Option value="Ascending" className="select-items">
+                        Ascending
+                    </Option>
+                    <Option value="Descending" className="select-items">
+                        Descending
+                    </Option>
+                </Select>
+            </div>
             <div className='GoodsCssCompDiv'>
                 <ul className='GoodsCssCompUl'>
                     {handleSorting(sorting).map((item) => (
                         <li className='GoodsCssCompLi' key={item.id} >
+                            <Image id='imgGoodId' src={item.product_image}/>
                             <p onClick={() => openModal(item)}>{item.product_name}</p>
                             <p>{item.product_price} $</p>
-                            <Button id='modalElementsId' onClick={()=>{
+                            <Button id='addGoodBtnİd' onClick={()=>{
                                 dispatch(postFetchAddMyBag(item))
                                 setFlag(!flag)
                                 console.log(checkAdd)
@@ -121,6 +116,7 @@ const GoodComponent = () => {
             <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
                 {selectedProduct && (
                     <div className='modalDivCss'>
+                        <Image id='imgModalId' src={selectedProduct.product_image}></Image>
                         <h2 id='modalElementsId'>{selectedProduct.product_name}</h2>
                         <p id='modalElementsId'>{selectedProduct.product_description}</p>
                         <p id='modalElementsId'>{selectedProduct.store_name}</p>

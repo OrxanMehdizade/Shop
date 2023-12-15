@@ -3,23 +3,50 @@
     height: 100vh;
     overflow-y: scroll;
 }
+#imgGoodId {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 200px;
+    object-fit: cover;
+    overflow: auto;
+}
 
-#searchTxtİD {
-    border-radius: 15px;
-    width: 350px;
-    padding: 5px;
-    border: 1px solid white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+
+.SearchGoodBtnCss {
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: center;
-    margin: auto;
-    &::placeholder{
-        color: black;
-        text-align: center;
+    margin-right: 20px;
+
+    & #searchTxtİD {
+        margin-right: 10px;
+        border: 2px solid orange;
+        background: white;
+        color: orange;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+        width: 350px;
+        border-radius: 15px;
+        padding: 5px;
+
+        &::placeholder {
+            color: orange;
+            text-align: center;
+        }
+
+        &:hover {
+            border: 2px solid #3C97BF;
+        }
     }
 }
+
+#addGoodBtnİd{
+    border: 2px solid orange;
+    color: orange;
+    margin: 10px;
+}
+
+
 .GoodsCssCompUl {
     list-style: none;
     display: flex;

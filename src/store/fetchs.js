@@ -6,7 +6,8 @@ import {getGoodsArray,
     postOrdersAdd,
     getAdminSearch,
     editAdmin,
-    deleteAdmin,deleteRecipient} from "./reducer";
+    deleteAdmin,
+    deleteRecipient,deleteBasketRecipient} from "./reducer";
 
 export function getFetchGoods(){
     return function (dispatch){
@@ -110,5 +111,14 @@ export function deleteFetchRecipient(object){
         fetch(`http://localhost:5000/delete-mybag/${object.id}`,{method:'DELETE'})
             .then(res=>res.text())
             .then(data=>dispatch(deleteRecipient(data)))
+    }
+}
+
+export function deleteFetchBasketRecipient(obj){
+    return function (dispatch){
+        fetch(`http://localhost:5000/delete-basket-mybag`,{method:'DELETE'})
+            .then(res=>res.text())
+            .then(data=>dispatch(deleteBasketRecipient(data)))
+
     }
 }
