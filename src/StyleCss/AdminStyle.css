@@ -1,31 +1,68 @@
-.adminDiv{
+.adminDiv {
     width: 100vw;
     height: 100vh;
     overflow-y: scroll;
+    margin-bottom: 10px;
 }
-.adminUl{
+
+.adminUl {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
-.adminLi{
+
+.adminLi {
     border: 1px solid orange;
-    width: 350px;
+    width: 450px;
     border-radius: 10px;
     margin: 15px;
     list-style: none;
     text-align: center;
-    display: inline-block;
-    flex: 0 0 calc(33.33% - 30px);
     box-sizing: border-box;
     padding: 20px;
-    & p{
-        margin: 10px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
     }
 
-    & Button{
+
+    & #imgAdminId {
+        max-width: 50%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
+
+    & p {
         margin: 10px;
+        border: 2px solid;
+        border-color: black black orange black;
+        padding: 2px;
+    }
+
+    & button {
+        border: 2px solid orange;
+        color: orange;
+        margin-top: 10px;
+    }
+
+    & #editCss,
+    #deleteCss {
+        border: 2px solid orange;
+        color: white;
+        background: black;
+        margin: 10px;
+        &:hover{
+            box-shadow: 0 0 10px rgba(255, 165, 0, 1);
+        }
     }
 }
 
@@ -65,6 +102,8 @@
         text-align: center;
     }
 }
+
+
 
 
 
@@ -113,36 +152,132 @@
     background-color: white !important;
 }
 
-#imgAdminId,#imgProductId{
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 200px;
-    object-fit: cover;
-    overflow: auto;
+
+
+
+.ReactModal__Content {
+    background-color: black !important;
+
 }
 
-#editCss,#deleteCss{
+
+.blackOverlay {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+
+
+
+.modalObjDivCss {
+    width: auto;
+    height: auto;
+    overflow-y: auto;
+    max-height: 100vh;
+    max-width: 100vw;
+    padding-bottom: 20px;
+}
+
+
+.modalObjUl{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+.modalLi {
+    list-style: none;
+    border: 1px solid orange;
+    border-radius: 10px;
+    margin: 15px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.liDivUserCss {
+    width: 40%;
+    text-align: left;
+    margin-right:15px ;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.productCssMainDiv {
+    display: flex;
+    align-items: center;
+    color: white;
+    margin: 20px;
     border: 2px solid orange;
-    color: orange;
+    padding: 10px;
+    border-radius: 5px;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+#imgProductId {
+    max-width: 50%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.liDivProductCss {
+    width: 60%;
+    text-align: left;
+    & p{
+        border: 1px solid;
+        border-color: black black orange black;
+        border-radius: 5px;
+        margin: 15px;
+        padding: 5px;
+        text-align: center;
+    }
+}
+
+#userH2Id {
+    border: 2px dotted orange;
+    border-radius: 10px;
+    padding: 5px;
+    color: white;
+    text-align: center;
+}
+
+#objPId {
+    border: 1px solid;
+    border-color: black black orange black;
+    color: white;
     margin: 10px;
 }
 
-
-
-.modalObjDivCss{
-    margin-top: 30px;
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding-top: 30px;
+#modalOrdersExit {
+    border: 1px solid orange;
+    background: black;
+    color: white;
+    width: 150px;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
     text-align: center;
-    & Button{
-        margin: 10px;
-    }
+    padding-bottom: 10px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+#modalOrdersExit:hover {
+    box-shadow: 0 0 10px rgba(255, 165, 0, 1);
 }
 
 
@@ -156,49 +291,38 @@
     & #modalElementsId{
         margin: 10px;
     }
-    & Input,& Button{
+    & Input{
         margin: 10px;
+        border: 2px solid orange;
+        background: black;
+        &:hover{
+            border: 2px solid orange;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 1);
+        }
+        &::placeholder{
+            font-style: italic;
+            color: white;
+            text-align: center;
+        }
+    }
+    & #editExitBtn{
+        margin: 10px;
+        border: 2px solid orange;
+        background: black;
+        color: white;
+        font-style: italic;
+        width: 100px;
+        text-align: center;
+        font-size: 15px;
+        &:hover{
+            box-shadow: 0 0 10px rgba(255, 165, 0, 1);
+        }
     }
 }
 
-#prodId{
-    border: 1px solid orange;
-    border-radius: 10px;
-    margin: 20px;
-}
-
-#objPId{
-    border: 1px solid;
-    border-color:white white orange white;
-}
-
-
-#userH2Id{
-    border: 2px dotted orange;
-    border-radius: 10px;
-    padding:5px;
-}
-.modalDiv{
-    overflow-y: scroll;
-}
-.modalUl{
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-.modalLi{
-    border: 1px solid orange;
-    width: 350px;
-    border-radius: 10px;
-    margin: 15px;
-    list-style: none;
-    text-align: center;
-    display: inline-block;
-    flex: 0 0 calc(33.33% - 30px);
-    box-sizing: border-box;
-    padding: 20px;
-    & p{
-        margin: 10px;
-    }
+.modalEditCss{
+    width: auto;
+    height: auto;
+    max-height: 100vh;
+    max-width: 100vw;
 }

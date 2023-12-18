@@ -88,69 +88,73 @@ const AdminComponent = () => {
                     {handleSorting(sorting).map((item)=>(
                         <li className='adminLi'>
                             <Image id='imgAdminId' src={item.product_image}/>
-                            <p>{item.product_name}</p>
-                            <p>{item.product_description}</p>
-                            <p>{item.store_name}</p>
-                            <p>{item.store_address}</p>
-                            <p>{item.product_price}</p>
-                            <Button id='editCss' onClick={()=> {
-                                setEditObj(item)
-                                setModalIsOpen(true)
-                            }}>Edit</Button>
-                            <Button id='deleteCss' onClick={()=>{
-                                dispatch(deleteFetchAdmin(item))
-                                setFlag(!flag)
-                            }}>Delete</Button>
+                            <div>
+                                <p>{item.product_name}</p>
+                                <p>{item.product_description}</p>
+                                <p>{item.store_name}</p>
+                                <p>{item.store_address}</p>
+                                <p>{item.product_price} $</p>
+                                <Button id='editCss' onClick={()=> {
+                                    setEditObj(item)
+                                    setModalIsOpen(true)
+                                }}>Edit</Button>
+                                <Button id='deleteCss' onClick={()=>{
+                                    dispatch(deleteFetchAdmin(item))
+                                    setFlag(!flag)
+                                }}>Delete</Button>
+                            </div>
                         </li>
                     ))}
                 </ul>
             </div>
 
             {
-                <Modal isOpen={showOrder}>
+                <Modal className='modalOrdersCss' isOpen={showOrder}>
                     <div className='modalObjDivCss'>
-                        <div className='modalObjDiv'>
-                            <ul className='modalObjUl'>
-                                {ordersArray.map((order, index) => (
-                                    <li className='modalLi' key={index}>
+                        <ul className='modalObjUl'>
+                            {ordersArray.map((order, index) => (
+                                <li className='modalLi' key={index}>
+                                    <div className='liDivUserCss'>
                                         <h2 id='userH2Id'>User Order</h2>
                                         <p id='objPId'>Name LastName: {order.name_LastName}</p>
                                         <p id='objPId'>Phone Number: {order.phone_Number}</p>
                                         <p id='objPId'>Address: {order.address}</p>
 
-                                        {order.obj.map((product, prodIndex) => (
-                                            <div id='prodId' key={prodIndex}>
-                                                <Image id='imgProductId' src={product.product_image}/>
+                                    </div>
+                                    {order.obj.map((product, prodIndex) => (
+                                        <div className='productCssMainDiv' key={prodIndex}>
+                                            <Image id='imgProductId' src={product.product_image}/>
+                                            <div className='liDivProductCss'>
                                                 <p>{product.product_name}</p>
                                                 <p>{product.product_description}</p>
                                                 <p>{product.store_name}</p>
                                                 <p>{product.store_address}</p>
                                                 <p>{product.product_price} $</p>
                                             </div>
-                                        ))}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <Button onClick={()=>setShowOrder(false)}>Exit</Button>
+                                        </div>
+                                    ))}
+                                </li>
+                            ))}
+                            <Button id='modalOrdersExit' onClick={()=>setShowOrder(false)}>Exit</Button>
+
+                        </ul>
                     </div>
                 </Modal>
                 }
 
 
             {
-                <Modal isOpen={modalIsOpen}>
+                <Modal className='modalEditCss' isOpen={modalIsOpen}>
                     <div className='modalDivCss'>
-                        <Input type='text' onChange={(e) => setPrice(e.target.value)}/>
-                        <Button onClick={() => {
+                        <Input type='text' placeholder='Edit Price...'   onChange={(e) => setPrice(e.target.value)}/>
+                        <Button id='editExitBtn' onClick={() => {
                             dispatch(editFetchAdmin(editObj, price));
                             setModalIsOpen(false);
                             setFlag(!flag)
 
                         }}>Edit</Button>
 
-                        <Button onClick={()=>setModalIsOpen(false)}>Exit</Button>
-
+                        <Button id='editExitBtn' onClick={()=>setModalIsOpen(false)}>Exit</Button>
 
                     </div>
                 </Modal>}

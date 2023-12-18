@@ -11,6 +11,7 @@
     margin-right: 20px;
 }
 
+
 .basketUlCss {
     list-style: none;
     display: flex;
@@ -20,16 +21,68 @@
 
 .basketLiCss {
     border: 1px solid orange;
-    width: calc(33.33% - 30px);
+    width: 350px;
     border-radius: 10px;
     margin: 15px;
+    list-style: none;
+    text-align: center;
     box-sizing: border-box;
     padding: 20px;
-    text-align: center;
-    & Button{
-        margin: 10px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+    & div{
+
+        & p,#H2Id{
+            border: 2px solid;
+            border-color: black black orange black;
+            padding: 2px;
+            margin-bottom: 15px;
+        }
+
+    }
+
+    &  #imgBasketId {
+        max-width: 50%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
+
+    & h2 {
+        margin: 10px 0;
+    }
+
+    & p {
+        margin: 5px 0;
+    }
+
+    & input[type="number"] {
+        margin-bottom: 10px;
+    }
+
+    & #deleteBasketCss {
+        border: 2px solid orange;
+        color: orange;
+        margin-top: 10px;
+        &:hover{
+            box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+        }
     }
 }
+
+
+
+
+
 
 
 .FormCss{
@@ -63,9 +116,14 @@
 }
 
 #checkOutCss{
-    background: orange;
+    border: 2px solid orange;
+    background: black;
+    color: white;
     margin-top: 10px;
     width: 150px;
+    &:hover{
+        box-shadow: 0 0 10px rgba(255, 165, 0, 1);
+    }
 }
 #imgBasketId{
     background-size: cover;
@@ -86,4 +144,7 @@
     color: orange;
     margin-right: 10px;
     border: 2px solid orange;
+    &:hover{
+        box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+    }
 }

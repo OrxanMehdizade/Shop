@@ -2,16 +2,66 @@
     width: 100vw;
     height: 100vh;
     overflow-y: scroll;
-}
-#imgGoodId {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 200px;
-    object-fit: cover;
-    overflow: auto;
+    margin-bottom: 10px;
 }
 
+.GoodsCssCompUl {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.GoodsCssCompLi {
+    border: 1px solid orange;
+    width: 350px;
+    border-radius: 10px;
+    margin: 15px;
+    list-style: none;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+    transform: scale(1.05);}
+
+    & #imgGoodId {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
+
+    & p{
+        border: 2px solid;
+        border-radius: 5px;
+        border-color: black black orange black;
+        padding: 2px;
+        margin-bottom: 10px;
+    }
+
+    & #nameModalClick:hover{
+        box-shadow: 0 0 10px rgba(255, 165, 0, 1);
+    }
+
+
+    #addGoodBtnİd {
+        border: 2px solid orange;
+        color: white;
+        background: black;
+        margin-top: 10px;
+        &:hover{
+            box-shadow: 0 0 10px rgba(255, 165, 0, 1);
+        }
+    }
+}
 
 .SearchGoodBtnCss {
     display: flex;
@@ -19,7 +69,7 @@
     align-items: center;
     margin-right: 20px;
 
-    & #searchTxtİD {
+    #searchTxtİD {
         margin-right: 10px;
         border: 2px solid orange;
         background: white;
@@ -40,50 +90,55 @@
     }
 }
 
-#addGoodBtnİd{
-    border: 2px solid orange;
-    color: orange;
-    margin: 10px;
+
+
+
+.ReactModal__Overlay {
+    background-color: black !important;
 }
 
 
-.GoodsCssCompUl {
-    list-style: none;
+.modalDivCss {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-
 }
 
-.GoodsCssCompLi {
-    border: 1px solid orange;
-    width: 350px;
-    border-radius: 10px;
-    margin: 15px;
-    list-style: none;
-    text-align: center;
-    display: inline-block;
-    flex: 0 0 calc(33.33% - 30px);
-    box-sizing: border-box;
-    padding: 20px;
-    & p{
-        margin: 10px;
-    }
-}
-
-
-.modalDivCss{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    text-align: center;
+.pTagDiv{
+    margin-top: 50px;
     & #modalElementsId{
         margin: 10px;
+        color: white;
+        border: 1px dotted orange;
+        border-radius: 10px;
+        padding: 10px;
     }
 }
 
-#btnAddId{
+#imgModalId {
+    max-width: 50%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 2px solid orange;
+    box-shadow: 0 0 10px rgba(255, 165, 0, 1);
+
+
+
+}
+
+
+
+#modalBtnElementsId {
+    border: 1px solid orange;
+    background: black;
+    color: white;
     margin-top: 10px;
+    &:hover{
+        box-shadow: 0 0 10px rgba(255, 165, 0, 1);
+    }
+
 }

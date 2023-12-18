@@ -101,28 +101,32 @@ const GoodComponent = () => {
                     {handleSorting(sorting).map((item) => (
                         <li className='GoodsCssCompLi' key={item.id} >
                             <Image id='imgGoodId' src={item.product_image}/>
-                            <p onClick={() => openModal(item)}>{item.product_name}</p>
-                            <p>{item.product_price} $</p>
-                            <Button id='addGoodBtnİd' onClick={()=>{
-                                dispatch(postFetchAddMyBag(item))
-                                setFlag(!flag)
-                                console.log(checkAdd)
-                            }}>Add Reciplent</Button>
+                            <div>
+                                <p id='nameModalClick' onClick={() => openModal(item)}>{item.product_name}</p>
+                                <p>{item.product_price} $</p>
+                                <Button id='addGoodBtnİd' onClick={()=>{
+                                    dispatch(postFetchAddMyBag(item))
+                                    setFlag(!flag)
+                                    console.log(checkAdd)
+                                }}>Add Reciplent</Button>
+                            </div>
                         </li>
                     ))}
                 </ul>
             </div>
 
-            <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+            <Modal className='Modal' isOpen={modalIsOpen} onRequestClose={closeModal}>
                 {selectedProduct && (
                     <div className='modalDivCss'>
                         <Image id='imgModalId' src={selectedProduct.product_image}></Image>
-                        <h2 id='modalElementsId'>{selectedProduct.product_name}</h2>
-                        <p id='modalElementsId'>{selectedProduct.product_description}</p>
-                        <p id='modalElementsId'>{selectedProduct.store_name}</p>
-                        <p id='modalElementsId'>{selectedProduct.store_address}</p>
-                        <p id='modalElementsId'>{selectedProduct.product_price} $</p>
-                        <Button id='modalElementsId' onClick={closeModal}>Close Modal</Button>
+                        <div className='pTagDiv'>
+                            <h2 id='modalElementsId'>{selectedProduct.product_name}</h2>
+                            <p id='modalElementsId'>{selectedProduct.product_description}</p>
+                            <p id='modalElementsId'>{selectedProduct.store_name}</p>
+                            <p id='modalElementsId'>{selectedProduct.store_address}</p>
+                            <p id='modalElementsId'>{selectedProduct.product_price} $</p>
+                            <Button id='modalBtnElementsId' onClick={closeModal}>Close Modal</Button>
+                        </div>
                     </div>
                 )}
             </Modal>

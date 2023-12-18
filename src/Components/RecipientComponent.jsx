@@ -53,19 +53,21 @@ const RecipientComponent = () => {
                     {handleSorting(sorting).map((item,index)=>(
                             <li key={index} className='basketLiCss'>
                                 <Image id='imgBasketId' src={item.product_image}/>
-                                <h2>{item.product_name}</h2>
-                                <p>{item.product_description}</p>
-                                <p>{item.store_name}</p>
-                                <p>{item.store_address}</p>
-                                <p>{item.product_price} $</p>
-                                <InputNumber type="number"
-                                             min={1}
-                                             onKeyDown={handleKeyDown}
-                                />
-                                <Button onClick={()=>{
-                                    dispatch(deleteFetchRecipient(item))
-                                    setFlag(!flag)
-                                }}>Delete</Button>
+                                <div>
+                                    <h2 id='H2Id'>{item.product_name}</h2>
+                                    <p>{item.product_description}</p>
+                                    <p>{item.store_name}</p>
+                                    <p>{item.store_address}</p>
+                                    <p>{item.product_price} $</p>
+                                    <InputNumber id='inpuNumId' type="number"
+                                                 min={1}
+                                                 onKeyDown={handleKeyDown}
+                                    />
+                                    <Button id='deleteBasketCss' onClick={()=>{
+                                        dispatch(deleteFetchRecipient(item))
+                                        setFlag(!flag)
+                                    }}>Delete</Button>
+                                </div>
                             </li>
                         ))}
                 </ul>
