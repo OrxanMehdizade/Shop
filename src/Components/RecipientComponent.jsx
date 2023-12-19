@@ -12,6 +12,7 @@ const RecipientComponent = () => {
     const [flag,setFlag]=useState(false);
     const [sorting, setSorting] = useState(null);
     const { Option } = Select;
+    const [searchValue, setSearchValue] = useState('');
     const [orderArray, setOrderArray] = useState({
         name_LastName: '',
         phone_Number: '',
@@ -23,10 +24,6 @@ const RecipientComponent = () => {
     const getData=()=>{
         dispatch(getFetchMyBag())
     }
-    useEffect(() => {
-        getData()
-    }, [dispatch,flag]);
-
     const onFinish = (values) => {console.log('Success:', values);};
     const onFinishFailed = (errorInfo) => {console.log('Failed:', errorInfo);};
 
@@ -42,15 +39,33 @@ const RecipientComponent = () => {
         return basketArrayCopy;
     };
 
+    const handleSearch = (value) => {
+        setSearchValue(value);
+    };
+    const handleCheckout = () => {
+        dispatch(postFetchOrdersAdd(orderArray));
+    };
 
 
+    useEffect(() => {
+        getData()
+    }, [dispatch,flag]);
 
     const handleKeyDown = (e) => { e.preventDefault();};
     return(
         <div className='basketMainDiv' >
             <div className='basketDivCss'>
+
                 <ul className='basketUlCss'>
-                    {handleSorting(sorting).map((item,index)=>(
+                    <Input
+                        id='searchAdminİD'
+                        placeholder='Search goods'
+                        value={searchValue}
+                        onChange={(e) => handleSearch(e.target.value)}
+                    />
+                    {handleSorting(sorting)
+                        .filter((item) => item.product_name.toLowerCase().startsWith(searchValue))
+                        .map((item,index)=>(
                             <li key={index} className='basketLiCss'>
                                 <Image id='imgBasketId' src={item.product_image}/>
                                 <div>
@@ -164,10 +179,10 @@ const RecipientComponent = () => {
 
                 <h3 id='totalPriceCss'>Total Price: </h3>
                 <Form.Item wrapperCol={{ offset: 8, span: 16,}}>
-                    <Button id='checkOutCss' type="primary" htmlType="submit" onClick={()=>{
-                        dispatch(postFetchOrdersAdd(orderArray));
+                    <Button id='checkOutCss' type="primary" htmlType="button" onClick={()=>{
+                        handleCheckout();
                         setFlag(!flag);
-                    }} >
+                    }}>
                         Checkout
                     </Button>
                 </Form.Item>

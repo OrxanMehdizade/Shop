@@ -1,8 +1,8 @@
 import React, { useEffect,useState } from 'react';
-import {getFetchGoods, getFetchAdminSearch, getFetchOrders,editFetchAdmin,deleteFetchAdmin} from '../store/fetchs';
+import {getFetchGoods, getFetchAdminSearch, getFetchOrders,editFetchAdmin,deleteFetchAdmin,postFetchAdminAdd} from '../store/fetchs';
 import { useDispatch, useSelector } from 'react-redux';
 import '../StyleCss/AdminStyle.css'
-import {Button, Input, Select, Alert, Image} from "antd";
+import {Button, Input, Select, Form, Image} from "antd";
 import Modal from "react-modal";
 
 const AdminComponent = () => {
@@ -14,14 +14,26 @@ const AdminComponent = () => {
     const dispatch = useDispatch();
     const [flag, setFlag] = useState(false);
     const [showOrder,setShowOrder]=useState(false)
+    const [showAdmin,setShowAdmin]=useState(false)
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [price,setPrice]=useState(null)
     const [editObj,setEditObj]=useState({})
+    const [addAdmin,setAddAdmin]=useState({
+        product_name:'',
+        product_description:'',
+        store_name:'',
+        store_address:'',
+        product_price:'',
+        product_image:'',
+    })
     function getGoodsData() {
         dispatch(getFetchGoods());
     }
 
+
+    const onFinish = (values) => {console.log('Success:', values);};
+    const onFinishFailed = (errorInfo) => {console.log('Failed:', errorInfo);};
     function getOrdersData() {
         dispatch(getFetchOrders());
     }
@@ -81,7 +93,8 @@ const AdminComponent = () => {
                         Descending
                     </Option>
                 </Select>
-                <Button onClick={()=>setShowOrder(true)}></Button>
+                <Button id='addCssId' onClick={()=>setShowAdmin(true)}>Add</Button>
+                <Button id='basketButton' onClick={()=>setShowOrder(true)}></Button>
             </div>
             <div className='adminDiv'>
                 <ul className='adminUl'>
@@ -141,6 +154,122 @@ const AdminComponent = () => {
                     </div>
                 </Modal>
                 }
+
+
+
+
+
+
+
+
+
+
+                {
+                <Modal className='modalOrdersCss' isOpen={showAdmin}>
+                    <div className='modalAdminDivCss'>
+                        <Form
+                            name="basic"
+                            className='FormAdminCss'
+                            labelCol={{ span: 8 }}
+                            wrapperCol={{ span: 16 }}
+                            initialValues={{ remember: true }}
+                            onFinish={onFinish}
+                            onFinishFailed={onFinishFailed}
+                            autoComplete="off">
+
+                            <h1 id='h1OrderCss'>Admin Form</h1>
+
+                            <Form.Item
+                                label={<span id='productNameCss'>Product Name</span>}
+                                name="product_name"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input the product name!',
+                                    },
+                                ]}>
+                                <Input name="product_name" onChange={(e) => setAddAdmin({ ...addAdmin, 'product_name': e.target.value })} />
+                            </Form.Item>
+
+                            <Form.Item
+                                label={<span id='productDescriptionCss'>Product Description</span>}
+                                name="product_description"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input the product description!',
+                                    },
+                                ]}>
+                                <Input.TextArea name="product_description" onChange={(e) => setAddAdmin({ ...addAdmin, 'product_description': e.target.value })} />
+                            </Form.Item>
+
+                            <Form.Item
+                                label={<span id='storeNameCss'>Store Name</span>}
+                                name="store_name"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input the store name!',
+                                    },
+                                ]}>
+                                <Input name="store_name" onChange={(e) => setAddAdmin({ ...addAdmin, 'store_name': e.target.value })} />
+                            </Form.Item>
+
+                            <Form.Item
+                                label={<span id='storeAddressCss'>Store Address</span>}
+                                name="store_address"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input the store address!',
+                                    },
+                                ]}>
+                                <Input.TextArea name="store_address" onChange={(e) => setAddAdmin({ ...addAdmin, 'store_address': e.target.value })} />
+                            </Form.Item>
+
+
+                            <Form.Item
+                                label={<span id='productPriceCss'>Product Price</span>}
+                                name="product_price"
+                                rules={[
+                                    {
+                                        required: true,
+                                        type: 'number',
+                                        message: 'Please input the product price!',
+                                    },
+                                ]}>
+                                <Input type="number" name="product_price" onChange={(e) => setAddAdmin({ ...addAdmin, 'product_price': e.target.value })} />
+                            </Form.Item>
+
+                            <Form.Item
+                                label={<span id='productImageCss'>Product Image</span>}
+                                name="product_image"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input the product image URL!',
+                                    },
+                                ]}>
+                                <Input name="product_image" onChange={(e) => setAddAdmin({ ...addAdmin, 'product_image': e.target.value })} />
+                            </Form.Item>
+                            <Button id='addExitBtn' type="primary" htmlType="button"
+                                    onClick={() => {
+                                        dispatch(postFetchAdminAdd(addAdmin))
+                                        setFlag(!flag)
+                                        setShowAdmin(false)
+                                    }}>
+                                Add Admin
+                            </Button>
+                            <Button id='addExitBtn' onClick={() => setShowAdmin(false)}>
+                                Exit
+                            </Button>
+                        </Form>
+                    </div>
+                </Modal>
+            }
+
+
+
 
 
             {

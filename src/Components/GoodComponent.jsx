@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFetchGoods,postFetchAddMyBag,getFetchGoodsSearch } from "../store/fetchs";
 import Modal from 'react-modal';
-import {Button, Select,Image} from 'antd';
+import {Button, Select, Image, notification} from 'antd';
 
 import '../StyleCss/GoodsStayle.css';
 
@@ -16,6 +16,15 @@ const GoodComponent = () => {
     const [searchValue, setSearchValue] = useState('');
     const dispatch = useDispatch();
     const { Option } = Select;
+    const [api,contextHolder]=notification.useNotification()
+    const openNotification=(placement,msg)=>{
+        notification.success({
+            message: 'Basket Add',
+            description: msg,
+            placement: 'bottom',
+        });
+
+    }
 
 
     function getData(){
@@ -47,15 +56,8 @@ const GoodComponent = () => {
 
 
 
-    const sortByCounts = (a, b) => {
-        const counts = JSON.parse(localStorage.getItem('productCounts')) || {};
-        const countA = counts[a.product_name] || 0;
-        const countB = counts[b.product_name] || 0;
-        return countB - countA;
-    };
 
     const openModal = (product) => {
-        localStorage.setItem('selectedProductGender', product.product_name);
         setSelectedProduct(product);
         setModalIsOpen(true);
     };
@@ -108,6 +110,7 @@ const GoodComponent = () => {
                                     dispatch(postFetchAddMyBag(item))
                                     setFlag(!flag)
                                     console.log(checkAdd)
+                                    openNotification('bottom', checkAdd);
                                 }}>Add Reciplent</Button>
                             </div>
                         </li>

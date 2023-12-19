@@ -90,7 +90,7 @@
     }
 
 
-    & button{
+    & #basketButton{
         background-image: url('../İmages/basket.png');
         background-size: cover;
         padding: 15px;
@@ -100,6 +100,25 @@
         border: 2px solid orange;
         color: white;
         text-align: center;
+        &:hover{
+            border: 2px solid orange;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+        }
+    }
+
+    & #addCssId{
+        margin: 10px;
+        border: 2px solid orange;
+        background: white;
+        color: orange;
+        font-style: italic;
+        width: 100px;
+        text-align: center;
+        &:hover{
+            border: 2px solid orange;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+        }
+
     }
 }
 
@@ -176,6 +195,7 @@
     max-width: 100vw;
     padding-bottom: 20px;
 }
+
 
 
 .modalObjUl{
@@ -325,4 +345,44 @@
     height: auto;
     max-height: 100vh;
     max-width: 100vw;
+}
+
+
+
+
+.modalAdminDivCss{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    & .FormAdminCss{
+        text-align: center;
+        padding: 20px;
+        border-radius:10px ;
+        border: 1px solid orange;
+        box-shadow: 0 0 10px rgba(0,0,0,0.9);
+        background:black;
+        margin:0 auto;
+        float:right;
+        & #productNameCss, #productDescriptionCss, #productPriceCss, #storeNameCss,#storeAddressCss,#productImageCss{
+            color: white;
+            font-size: 13px;
+            margin-right: 50px;
+        }
+
+    }
+
+    & #addExitBtn{
+        border: 2px solid orange;
+        background: black;
+        color: white;
+        margin-top: 10px;
+        width: 150px;
+        margin-left: 15px;
+        &:hover{
+            box-shadow: 0 0 10px rgba(255, 165, 0, 1);
+        }
+    }
+
+
 }

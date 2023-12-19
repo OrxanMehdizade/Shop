@@ -7,7 +7,7 @@ import {getGoodsArray,
     getAdminSearch,
     editAdmin,
     deleteAdmin,
-    deleteRecipient,deleteBasketRecipient} from "./reducer";
+    deleteRecipient,deleteBasketRecipient,postAdminAdd} from "./reducer";
 
 export function getFetchGoods(){
     return function (dispatch){
@@ -60,6 +60,21 @@ export function postFetchOrdersAdd(object){
         })
             .then(res=>res.text())
             .then(data=>dispatch(postOrdersAdd(data)))
+    }
+}
+
+
+export function postFetchAdminAdd(obj){
+    return function (dispatch){
+        fetch('http://localhost:5000/add-admin',{
+            method:'POST',
+            headers:{
+                'Content-type':'application/json'
+            },
+            body:JSON.stringify(obj)
+        })
+            .then(res=>res.text())
+            .then(data=>dispatch(postAdminAdd(data)))
     }
 }
 
