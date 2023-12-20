@@ -17,11 +17,10 @@ const GoodComponent = () => {
     const dispatch = useDispatch();
     const { Option } = Select;
     const [api,contextHolder]=notification.useNotification()
-    const openNotification=(placement,msg)=>{
+    const openNotification=(placement)=>{
         notification.success({
-            message: 'Basket Add',
-            description: msg,
-            placement: 'bottom',
+            message: 'The operation was successful',
+            placement: placement,
         });
 
     }
@@ -109,8 +108,7 @@ const GoodComponent = () => {
                                 <Button id='addGoodBtnİd' onClick={()=>{
                                     dispatch(postFetchAddMyBag(item))
                                     setFlag(!flag)
-                                    console.log(checkAdd)
-                                    openNotification('bottom', checkAdd);
+                                    openNotification('bottom');
                                 }}>Add Reciplent</Button>
                             </div>
                         </li>

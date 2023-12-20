@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react';
 import {getFetchGoods, getFetchAdminSearch, getFetchOrders,editFetchAdmin,deleteFetchAdmin,postFetchAdminAdd} from '../store/fetchs';
 import { useDispatch, useSelector } from 'react-redux';
 import '../StyleCss/AdminStyle.css'
-import {Button, Input, Select, Form, Image} from "antd";
+import {Button, Input, Select, Form, Image, notification} from "antd";
 import Modal from "react-modal";
 
 const AdminComponent = () => {
@@ -31,6 +31,13 @@ const AdminComponent = () => {
         dispatch(getFetchGoods());
     }
 
+    const openNotification=(placement)=>{
+        notification.success({
+            message: 'The operation was successful',
+            placement: placement,
+        });
+
+    }
 
     const onFinish = (values) => {console.log('Success:', values);};
     const onFinishFailed = (errorInfo) => {console.log('Failed:', errorInfo);};
@@ -114,6 +121,7 @@ const AdminComponent = () => {
                                 <Button id='deleteCss' onClick={()=>{
                                     dispatch(deleteFetchAdmin(item))
                                     setFlag(!flag)
+                                    openNotification('bottom');
                                 }}>Delete</Button>
                             </div>
                         </li>
@@ -257,6 +265,7 @@ const AdminComponent = () => {
                                         dispatch(postFetchAdminAdd(addAdmin))
                                         setFlag(!flag)
                                         setShowAdmin(false)
+                                        openNotification('bottom');
                                     }}>
                                 Add Admin
                             </Button>
@@ -280,6 +289,7 @@ const AdminComponent = () => {
                             dispatch(editFetchAdmin(editObj, price));
                             setModalIsOpen(false);
                             setFlag(!flag)
+                            openNotification('bottom');
 
                         }}>Edit</Button>
 

@@ -14,7 +14,7 @@ let goods = [
         product_price: 50,
         store_name: "Moda Dünyası",
         store_address: "Bakı şəhəri, Nizami kuçəsi 5",
-        product_image: "https://emart.az/image/cache/catalog/i/hp/eb/25b1d80d89ec6e079ed2d18afb066d99-1000x1000.jpg",
+        product_image: "https://topbrands.az/data/img/202308/361/medium_44-782-1.webp",
     },
     {
         product_name: "Qadın bluzası",

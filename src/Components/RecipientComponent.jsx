@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {getFetchMyBag, postFetchOrdersAdd,deleteFetchRecipient,deleteFetchBasketRecipient} from '../store/fetchs'
 import {useDispatch,useSelector} from "react-redux";
-import {Button, Form, Image, Input, InputNumber, Select} from 'antd';
+import {Button, Form, Image, Input, InputNumber, notification, Select} from 'antd';
 import '../StyleCss/basket.css'
 
 
@@ -21,6 +21,16 @@ const RecipientComponent = () => {
     });
 
     console.log(chekor)
+
+    console.log(orderArray.obj)
+
+    const openNotification=(placement)=>{
+        notification.success({
+            message: 'The operation was successful',
+            placement: placement,
+        });
+
+    }
     const getData=()=>{
         dispatch(getFetchMyBag())
     }
@@ -44,12 +54,17 @@ const RecipientComponent = () => {
     };
     const handleCheckout = () => {
         dispatch(postFetchOrdersAdd(orderArray));
+        setFlag(!flag)
     };
 
-
     useEffect(() => {
-        getData()
-    }, [dispatch,flag]);
+        const fetchDataAndSetOrderArray = async () => {
+            await getData(); // Assuming getData is an asynchronous function
+            setOrderArray(prevState => ({ ...prevState, obj: [...basketArray] }));
+        };
+
+        fetchDataAndSetOrderArray();
+    }, [dispatch, flag, basketArray]);
 
     const handleKeyDown = (e) => { e.preventDefault();};
     return(
@@ -181,7 +196,7 @@ const RecipientComponent = () => {
                 <Form.Item wrapperCol={{ offset: 8, span: 16,}}>
                     <Button id='checkOutCss' type="primary" htmlType="button" onClick={()=>{
                         handleCheckout();
-                        setFlag(!flag);
+                        openNotification('bottom');
                     }}>
                         Checkout
                     </Button>
