@@ -1,3 +1,5 @@
+
+
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -14,6 +16,7 @@ let goods = [
         product_price: 50,
         store_name: "Moda Dünyası",
         store_address: "Bakı şəhəri, Nizami kuçəsi 5",
+        quantity:1,
         product_image: "https://topbrands.az/data/img/202308/361/medium_44-782-1.webp",
     },
     {
@@ -22,7 +25,9 @@ let goods = [
         product_price: 60,
         store_name: "Moda Dünyası",
         store_address: "Bakı şəhəri, Nizami kuçəsi 5",
+        quantity:1,
         product_image: "https://rokkit.ru/assets/df4-f41.jpg",
+
     },
     {
         product_name: "Kişi pantolonu",
@@ -30,6 +35,7 @@ let goods = [
         product_price: 75,
         store_name: "Moda Dünyası",
         store_address: "Bakı şəhəri, Nizami kuçəsi 5",
+        quantity:1,
         product_image: "https://cdn.dsmcdn.com/mnresize/500/-/ty493/product/media/images/20220728/4/151254593/426690861/1/1_org.jpg",
     },
     {
@@ -38,6 +44,7 @@ let goods = [
         product_price: 40,
         store_name: "Moda Dünyası",
         store_address: "Bakı şəhəri, Nizami kuçəsi 5",
+        quantity:1,
         product_image: "https://img5.lalafo.com/i/posters/api/47/68/2f/turkiyenin-qara-beli-zepli-eteyi-temiz-firma-malidi-sekilde-58604934_image-1675590646.jpeg",
     },
     {
@@ -46,6 +53,7 @@ let goods = [
         product_price: 20,
         store_name: "Moda Dünyası",
         store_address: "Bakı şəhəri, Nizami kuçəsi 5",
+        quantity:1,
         product_image: "https://strgimgr.umico.az/sized/840/190211-0dfc99824db7759c3ac8785ce0a27e4f.jpg",
     },
     {
@@ -54,6 +62,7 @@ let goods = [
         product_price: 90,
         store_name: "Moda Dünyası",
         store_address: "Bakı şəhəri, Nizami kuçəsi 5",
+        quantity:1,
         product_image: "https://hediyyeler.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-09-08-at-00.13.27-1.jpeg",
     },
     {
@@ -62,6 +71,7 @@ let goods = [
         product_price: 120,
         store_name: "Moda Dünyası",
         store_address: "Bakı şəhəri, Nizami kuçəsi 5",
+        quantity:1,
         product_image: "https://strgimgr.umico.az/sized/280/403073-1872461a7dba10bfa765159e5592f320.jpg",
     },
     {
@@ -70,6 +80,7 @@ let goods = [
         product_price: 85,
         store_name: "Moda Dünyası",
         store_address: "Bakı şəhəri, Nizami kuçəsi 5",
+        quantity:1,
         product_image: "https://static.shop.az/images/product/medium/v/b/f/e/OX84okDHnDN24fdBq5m19tXm9cAZoJNhwmkPyiBN.jpg",
     },
     {
@@ -78,6 +89,7 @@ let goods = [
         product_price: 45,
         store_name: "Moda Dünyası",
         store_address: "Bakı şəhəri, Nizami kuçəsi 5",
+        quantity:1,
         product_image: "https://strgimgr.umico.az/sized/840/419007-87f5118d570a551af1b444da3583c23f.jpg",
     },
     {
@@ -86,6 +98,7 @@ let goods = [
         product_price: 70,
         store_name: "Zərif Moda",
         store_address: "Bakı şəhəri, 28 May kuçəsi 12",
+        quantity:1,
         product_image: "https://unimall.az/images/detailed/285/71209567_102334327801458_195243717355599024_n.jpg",
     },
     {
@@ -94,6 +107,7 @@ let goods = [
         product_price: 250,
         store_name: "Zərif Moda",
         store_address: "Bakı şəhəri, 28 May kuçəsi 12",
+        quantity:1,
         product_image: "https://strgimgr.umico.az/sized/840/439276-691e73a6f79740a9915a1c3b93e171ff.jpg",
     },
     {
@@ -102,6 +116,7 @@ let goods = [
         product_price: 200,
         store_name: "Zərif Moda",
         store_address: "Bakı şəhəri, 28 May kuçəsi 12",
+        quantity:1,
         product_image: "https://img5.lalafo.com/i/posters/original/05/75/df/0cf477c97bd069b6db590941da.jpeg",
     },
     {
@@ -110,6 +125,7 @@ let goods = [
         product_price: 40,
         store_name: "Zərif Moda",
         store_address: "Bakı şəhəri, 28 May kuçəsi 12",
+        quantity:1,
         product_image: "https://prime-accessories.com/uploads/images/products/e51c292f5f-Kisi-kemer-625ffd3f21e9f.jpg",
     },
     {
@@ -118,6 +134,7 @@ let goods = [
         product_price: 180,
         store_name: "Zərif Moda",
         store_address: "Bakı şəhəri, 28 May kuçəsi 12",
+        quantity:1,
         product_image: "https://www.thoughtco.com/thmb/ctxxtfGGeK5f_-S3f8J-jbY-Gp8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/close-up-of-clothes-hanging-in-row-739240657-5a78b11f8e1b6e003715c0ec.jpg",
     },
     {
@@ -126,6 +143,7 @@ let goods = [
         product_price: 60,
         store_name: "Zərif Moda",
         store_address: "Bakı şəhəri, 28 May kuçəsi 12",
+        quantity:1,
         product_image: "https://unimall.az/images/detailed/280/bfc30356-da3f-44d7-8aa9-e6e6d23fc948.jpg",
     },
     {
@@ -134,6 +152,7 @@ let goods = [
         product_price: 45,
         store_name: "Zərif Moda",
         store_address: "Bakı şəhəri, 28 May kuçəsi 12",
+        quantity:1,
         product_image: "https://strgimgr.umico.az/sized/840/247763-8b0dfc45419c4742f706653122fb3c56.jpg",
     },
     {
@@ -142,6 +161,7 @@ let goods = [
         product_price: 150,
         store_name: "Zərif Moda",
         store_address: "Bakı şəhəri, 28 May kuçəsi 12",
+        quantity:1,
         product_image: "https://saatlar.az/uploads/news/ac44311231ef93d0c4b74c4c3b4717fa.jpg",
     },
     {
@@ -150,6 +170,7 @@ let goods = [
         product_price: 220,
         store_name: "Əliyev Moda Mərkəzi",
         store_address: "Bakı şəhəri, Azadlıq prospekti 89",
+        quantity:1,
         product_image: "https://img5.lalafo.com/i/posters/original/73/ec/97/29476eb8bbf35359f53c253018.jpeg",
     },
     {
@@ -158,7 +179,7 @@ let goods = [
         product_price: 35,
         store_name: "Əliyev Moda Mərkəzi",
         store_address: "Bakı şəhəri, Azadlıq prospekti 89",
-
+        quantity:1,
         product_image: "https://cdn.dsmcdn.com/mnresize/500/-/ty992/product/media/images/prod/SPM/PIM/20230826/01/8302b556-7ef4-322b-be90-3208b5d67ca8/1_org.jpg",
     },
     {
@@ -167,6 +188,7 @@ let goods = [
         product_price: 50,
         store_name: "Əliyev Moda Mərkəzi",
         store_address: "Bakı şəhəri, Azadlıq prospekti 89",
+        quantity:1,
         product_image: "https://cdn03.ciceksepeti.com/cicek/kcm5015167-1/XL/kadin-pamuklu-esnek-bandana-sac-bandi-ince-boy-toka-2177-kcm5015167-1-a637f5eb928340e0b0d5d295a7dd3694.jpg",
     },
     {
@@ -175,6 +197,7 @@ let goods = [
         product_price: 320,
         store_name: "Əliyev Moda Mərkəzi",
         store_address: "Bakı şəhəri, Azadlıq prospekti 89",
+        quantity:1,
         product_image: "https://safe-vision.com/wp-content/uploads/2020/06/jpg_q50-kostyum-kkkkkkkkkkk-1.jpg",
     },
     {
@@ -183,6 +206,7 @@ let goods = [
         product_price: 150,
         store_name: "Əliyev Moda Mərkəzi",
         store_address: "Bakı şəhəri, Azadlıq prospekti 89",
+        quantity:1,
         product_image: "https://garia.top/images5/0918/tuta-jumpsuit-donna/tuta-jumpsuit-donna-80_2.jpg",
     },
     {
@@ -191,6 +215,7 @@ let goods = [
         product_price: 70,
         store_name: "Əliyev Moda Mərkəzi",
         store_address: "Bakı şəhəri, Azadlıq prospekti 89",
+        quantity:1,
         product_image: "https://static.shop.az/images/product/medium/25769ea4-478e-4b8e-8a62-446b3cb5c2a2.jpg",
     },
     {
@@ -199,6 +224,7 @@ let goods = [
         product_price: 95,
         store_name: "Əliyev Moda Mərkəzi",
         store_address: "Bakı şəhəri, Azadlıq prospekti 89",
+        quantity:1,
         product_image: "https://geyimler.az/uploads/news/fbfe7b920d3c9264f806cbdb91bf4051.jpg",
     },
     {
@@ -207,6 +233,7 @@ let goods = [
         product_price: 55,
         store_name: "Əliyev Moda Mərkəzi",
         store_address: "Bakı şəhəri, Azadlıq prospekti 89",
+        quantity:1,
         product_image: "https://www.esport.az/uploads/products/thumbnails/idman-formasi-essential-II-navy-white-joma-101535-332.webp",
     },
     {
@@ -215,6 +242,7 @@ let goods = [
         product_price: 45,
         store_name: "Əliyev Moda Mərkəzi",
         store_address: "Bakı şəhəri, Azadlıq prospekti 89",
+        quantity:1,
         product_image: "https://images.pexels.com/photos/325876/pexels-photo-325876.jpeg?cs=srgb&dl=pexels-pixabay-325876.jpg&fm=jpg",
     },
     {
@@ -223,6 +251,7 @@ let goods = [
         product_price: 100,
         store_name: "Əliyev Moda Mərkəzi",
         store_address: "Bakı şəhəri, Azadlıq prospekti 89",
+        quantity:1,
         product_image: "https://strgimgr.umico.az/sized/840/121305-70588d38dbc894b5f6e5e4fe8a00a9fa.jpg",
     },
     {
@@ -231,6 +260,7 @@ let goods = [
         product_price: 80,
         store_name: "Əliyev Moda Mərkəzi",
         store_address: "Bakı şəhəri, Azadlıq prospekti 89",
+        quantity:1,
         product_image: "https://bermud.az/84437-large_default/qadin-tiri-giorgio-armani-si-100-ml.jpg",
     },
     {
@@ -239,6 +269,7 @@ let goods = [
         product_price: 25,
         store_name: "Əliyev Moda Mərkəzi",
         store_address: "Bakı şəhəri, Azadlıq prospekti 89",
+        quantity:1,
         product_image: "https://m.media-amazon.com/images/I/51MC2p7hEPL._AC_SY780_.jpg",
     },
     {
@@ -247,6 +278,7 @@ let goods = [
         product_price: 65,
         store_name: "Əliyev Moda Mərkəzi",
         store_address: "Bakı şəhəri, Azadlıq prospekti 89",
+        quantity:1,
         product_image: "https://images.pexels.com/photos/325876/pexels-photo-325876.jpeg?cs=srgb&dl=pexels-pixabay-325876.jpg&fm=jpg",
     },
 ];
@@ -322,6 +354,14 @@ app.put("/change-admin/:id", (req, res) => {
     goods[index] = req.body;
     res.send(`Element ${req.body.product_name} was changed`);
 });
+
+app.put("/change-quantity/:id", (req, res) => {
+    let id = parseInt(req.params.id);
+    let index = goods.findIndex((item) => id === item.id);
+    myBag[index] = req.body;
+    res.send(`Element ${req.body.quantity} quantity was changed`);
+});
+
 
 app.get("/search-goods/:searchValue", (req, res) => {
     let searchValue = req.params.searchValue;

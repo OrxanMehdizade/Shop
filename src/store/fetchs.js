@@ -1,3 +1,6 @@
+
+
+
 import {getGoodsArray,
     getMyBagArray,
     getOrdersArray,
@@ -7,7 +10,9 @@ import {getGoodsArray,
     getAdminSearch,
     editAdmin,
     deleteAdmin,
-    deleteRecipient,deleteBasketRecipient,postAdminAdd} from "./reducer";
+    deleteRecipient,
+    deleteBasketRecipient,
+    postAdminAdd,editQuantity} from "./reducer";
 
 export function getFetchGoods(){
     return function (dispatch){
@@ -95,6 +100,23 @@ export function getFetchAdminSearch(searchAdminValue){
     }
 
 }
+
+export function editFetchQuantity(editObj, quantity) {
+    let obj = { ...editObj, "quantity": quantity };
+    return function (dispatch) {
+        fetch(`http://localhost:5000/change-quantity/${editObj.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+            .then(res => res.text())
+            .then(data => dispatch(editQuantity(data)))
+    }
+}
+
+
 
 export function editFetchAdmin(editObj,price){
     let obj={...editObj,"product_price":price}

@@ -150,6 +150,7 @@ const AdminComponent = () => {
                                                 <p>{product.product_description}</p>
                                                 <p>{product.store_name}</p>
                                                 <p>{product.store_address}</p>
+                                                <p>{product.quantity}</p>
                                                 <p>{product.product_price} $</p>
                                             </div>
                                         </div>

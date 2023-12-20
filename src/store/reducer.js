@@ -1,3 +1,5 @@
+
+
 import {createSlice} from "@reduxjs/toolkit";
 
 const shopSlice=createSlice({
@@ -13,6 +15,7 @@ const shopSlice=createSlice({
         deleteRecipientData:null,
         deleteBasketRecipientData:null,
         postAdminAddData:null,
+        quantity:null,
     },
     reducers:{
         getGoodsArray:(state,action)=>{
@@ -50,7 +53,10 @@ const shopSlice=createSlice({
         },
         postAdminAdd(state,action){
             return{...state,goodsArray:action.payload}
-        }
+        },
+        editQuantity(state, action) {
+            return { ...state, quantity: action.payload };
+        },
 
 
     }
@@ -67,5 +73,8 @@ export const {getGoodsArray
     deleteAdmin,
     deleteRecipient,
     deleteBasketRecipient,
-    postAdminAdd}=shopSlice.actions
+    postAdminAdd,
+    editQuantity}=shopSlice.actions
 export default shopSlice.reducer
+
+

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {getFetchMyBag, postFetchOrdersAdd,deleteFetchRecipient,deleteFetchBasketRecipient} from '../store/fetchs'
+import {getFetchMyBag, postFetchOrdersAdd,deleteFetchRecipient,deleteFetchBasketRecipient,editFetchQuantity} from '../store/fetchs'
 import {useDispatch,useSelector} from "react-redux";
 import {Button, Form, Image, Input, InputNumber, notification, Select} from 'antd';
 import '../StyleCss/basket.css'
@@ -8,11 +8,13 @@ import '../StyleCss/basket.css'
 const RecipientComponent = () => {
     const basketArray=useSelector((state)=>state.mySliceName.myBagArray);
     const chekor=useSelector((state)=>state.mySliceName.addOrders)
+    const chekquant=useSelector((state)=>state.mySliceName.quantity)
     const dispatch=useDispatch();
     const [flag,setFlag]=useState(false);
     const [sorting, setSorting] = useState(null);
     const { Option } = Select;
     const [searchValue, setSearchValue] = useState('');
+    const [sum,setSum]=useState(0)
     const [orderArray, setOrderArray] = useState({
         name_LastName: '',
         phone_Number: '',
@@ -53,6 +55,11 @@ const RecipientComponent = () => {
         setFlag(!flag)
     };
 
+    const handleCalc = (price) => {
+        setSum((e) => e + price);
+    };
+
+
     useEffect(() => {
         getData();
         setOrderArray(newObj => ({ ...newObj, obj: [...basketArray] }));
@@ -80,10 +87,17 @@ const RecipientComponent = () => {
                                     <p>{item.product_description}</p>
                                     <p>{item.store_name}</p>
                                     <p>{item.store_address}</p>
+                                    <p>{item.quantity}</p>
                                     <p>{item.product_price} $</p>
                                     <InputNumber id='inpuNumId' type="number"
                                                  min={1}
                                                  onKeyDown={handleKeyDown}
+                                                 onChange={(value)=>{
+                                                     dispatch(editFetchQuantity(item,value))
+                                                     const cvb1=item.product_price*item.quantity
+                                                     handleCalc(cvb1);
+                                                     setFlag(!flag)
+                                                 }}
                                     />
                                     <Button id='deleteBasketCss' onClick={()=>{
                                         dispatch(deleteFetchRecipient(item))
@@ -184,7 +198,7 @@ const RecipientComponent = () => {
                     <Input.TextArea name="address" onChange={(e)=>setOrderArray({ ...orderArray, 'address': e.target.value })}  />
                 </Form.Item>
 
-                <h3 id='totalPriceCss'>Total Price: </h3>
+                <h3 id='totalPriceCss'>Total Price: {sum} </h3>
                 <Form.Item wrapperCol={{ offset: 8, span: 16,}}>
                     <Button id='checkOutCss' type="primary" htmlType="button" onClick={()=>{
                         handleCheckout();
