@@ -20,10 +20,6 @@ const RecipientComponent = () => {
         obj:[...basketArray],
     });
 
-    console.log(chekor)
-
-    console.log(orderArray.obj)
-
     const openNotification=(placement)=>{
         notification.success({
             message: 'The operation was successful',
@@ -58,12 +54,8 @@ const RecipientComponent = () => {
     };
 
     useEffect(() => {
-        const fetchDataAndSetOrderArray = async () => {
-            await getData(); // Assuming getData is an asynchronous function
-            setOrderArray(prevState => ({ ...prevState, obj: [...basketArray] }));
-        };
-
-        fetchDataAndSetOrderArray();
+        getData();
+        setOrderArray(newObj => ({ ...newObj, obj: [...basketArray] }));
     }, [dispatch, flag, basketArray]);
 
     const handleKeyDown = (e) => { e.preventDefault();};
