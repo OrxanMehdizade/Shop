@@ -26,8 +26,6 @@ const RecipientComponent = () => {
     });
 
 
-    let [countInput,setCountInput]=useState(1)
-
     const openNotification=(placement)=>{
         notification.success({
             message: 'The operation was successful',
@@ -83,7 +81,6 @@ const RecipientComponent = () => {
         handleCalc();
     }, [dispatch, flag, basketArray]);
 
-    const handleKeyDown = (e) => { e.preventDefault();};
     return(
         <div className='basketMainDiv' >
             <div className='basketDivCss'>
@@ -110,7 +107,6 @@ const RecipientComponent = () => {
                                     <Button
                                         onClick={() => {
                                             handleQuantityChange(item, item.quantity - 1);
-                                            // ... existing logic ...
                                         }}
                                     >
                                         -
@@ -119,7 +115,6 @@ const RecipientComponent = () => {
                                     <Button
                                         onClick={() => {
                                             handleQuantityChange(item, item.quantity + 1);
-                                            // ... existing logic ...
                                         }}
                                     >
                                         +
