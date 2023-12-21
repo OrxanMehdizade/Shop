@@ -19,8 +19,14 @@ const RecipientComponent = () => {
         name_LastName: '',
         phone_Number: '',
         address: '',
+        total_price:'',
         obj:[...basketArray],
+
+
     });
+
+
+    let [countInput,setCountInput]=useState(1)
 
     const openNotification=(placement)=>{
         notification.success({
@@ -55,14 +61,26 @@ const RecipientComponent = () => {
         setFlag(!flag)
     };
 
-    const handleCalc = (price) => {
-        setSum((e) => e + price);
+    const handleCalc = () => {
+        const totalSum = basketArray.reduce((sum, item) => {
+            return sum + item.product_price * item.quantity;
+        }, 0);
+
+        setSum(totalSum);
+        setOrderArray(newObj => ({ ...newObj, total_price:sum }));
+
     };
 
+
+    const handleQuantityChange = (item, newQuantity) => {
+        dispatch(editFetchQuantity(item, newQuantity));
+
+    };
 
     useEffect(() => {
         getData();
         setOrderArray(newObj => ({ ...newObj, obj: [...basketArray] }));
+        handleCalc();
     }, [dispatch, flag, basketArray]);
 
     const handleKeyDown = (e) => { e.preventDefault();};
@@ -89,16 +107,23 @@ const RecipientComponent = () => {
                                     <p>{item.store_address}</p>
                                     <p>{item.quantity}</p>
                                     <p>{item.product_price} $</p>
-                                    <InputNumber id='inpuNumId' type="number"
-                                                 min={1}
-                                                 onKeyDown={handleKeyDown}
-                                                 onChange={(value)=>{
-                                                     dispatch(editFetchQuantity(item,value))
-                                                     const cvb1=item.product_price*item.quantity
-                                                     handleCalc(cvb1);
-                                                     setFlag(!flag)
-                                                 }}
-                                    />
+                                    <Button
+                                        onClick={() => {
+                                            handleQuantityChange(item, item.quantity - 1);
+                                            // ... existing logic ...
+                                        }}
+                                    >
+                                        -
+                                    </Button>
+                                    <input type='text' value={item.quantity} readOnly />
+                                    <Button
+                                        onClick={() => {
+                                            handleQuantityChange(item, item.quantity + 1);
+                                            // ... existing logic ...
+                                        }}
+                                    >
+                                        +
+                                    </Button>
                                     <Button id='deleteBasketCss' onClick={()=>{
                                         dispatch(deleteFetchRecipient(item))
                                         setFlag(!flag)

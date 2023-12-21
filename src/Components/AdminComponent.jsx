@@ -140,6 +140,7 @@ const AdminComponent = () => {
                                         <p id='objPId'>Name LastName: {order.name_LastName}</p>
                                         <p id='objPId'>Phone Number: {order.phone_Number}</p>
                                         <p id='objPId'>Address: {order.address}</p>
+                                        <p id='objPId'>Total Price: {order.total_price}</p>
 
                                     </div>
                                     {order.obj.map((product, prodIndex) => (
