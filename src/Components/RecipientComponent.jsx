@@ -104,21 +104,25 @@ const RecipientComponent = () => {
                                     <p>{item.store_address}</p>
                                     <p>{item.quantity}</p>
                                     <p>{item.product_price} $</p>
-                                    <Button
-                                        onClick={() => {
-                                            handleQuantityChange(item, item.quantity - 1);
-                                        }}
-                                    >
-                                        -
-                                    </Button>
-                                    <input type='text' value={item.quantity} readOnly />
-                                    <Button
-                                        onClick={() => {
-                                            handleQuantityChange(item, item.quantity + 1);
-                                        }}
-                                    >
-                                        +
-                                    </Button>
+                                    <div className='InDecInpCss'>
+                                        <Button
+                                            id='decrmentId'
+                                            onClick={() => {
+                                                handleQuantityChange(item, item.quantity - 1);
+                                            }}
+                                        >
+                                            -
+                                        </Button>
+                                        <input id='countInputId' type='text' value={item.quantity} readOnly />
+                                        <Button
+                                            id='incrementId'
+                                            onClick={() => {
+                                                handleQuantityChange(item, item.quantity + 1);
+                                            }}
+                                        >
+                                            +
+                                        </Button>
+                                    </div>
                                     <Button id='deleteBasketCss' onClick={()=>{
                                         dispatch(deleteFetchRecipient(item))
                                         setFlag(!flag)

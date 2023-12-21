@@ -79,6 +79,41 @@
     }
 }
 
+.InDecInpCss{
+    display: flex;
+    align-items: center;
+}
+
+#incrementId,#decrmentId{
+    border-radius: 50%;
+    border: 2px solid orange;
+    background: black;
+    margin: 0 5px;
+    color: white;
+}
+
+#decrmentId:hover{
+    box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+    color: red;
+}
+
+#incrementId:hover{
+    box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+    color: chartreuse;
+}
+
+#countInputId{
+    width: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 20px;
+    text-align: center;
+    padding: 5px;
+    background: black;
+    color: white;
+    border: 2px solid orange;
+}
+
 #searchAdminİD{
     border: 2px solid orange;
     background: white;
